@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Teleconsulto </ion-title>
+    <ion-button [routerLink]="['/profile']" routerDirection="forward" fill="clear" slot="end" size="large">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div style="margin-left: 20px; margin-right: 20px;">
+
+      <ion-button expand="block" style="margin: 20px 0px 20px 0px; height: 60px;" [routerLink]="['/nuovo']"
+        routerDirection="forward">
+        <ion-icon name="add-circle-outline" style="padding-right: 5px" size="large"></ion-icon>
+        <ion-text>Nuovo consulto</ion-text>
+      </ion-button>
+
+      <ion-card button *ngFor="let consulto of consulti" (click)="openConsulto(consulto)"
+        style="margin: 0px 0px 20px 0px">
+        <ion-item-divider class="card-header" style="width: 100%; padding: 0px;">
+          <ion-label color="danger" style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+            <h2 class="ion-text-center" style="font-size: 1.3em;">{{ consulto.paziente_cognome }} {{
+              consulto.paziente_nome }}</h2>
+          </ion-label>
+        </ion-item-divider>
+        <h2 class="ion-text-center" style="margin: 15px 10px 15px 10px; font-size: 1.3em;">{{ consulto.oggetto }}</h2>
+        <div style="margin-left: 15px; margin-bottom: 10px;">
+          <ion-text>
+            <h6 style="margin-top: 0px; margin-bottom: 0px;">Codice paziente: <b>{{ consulto.paziente_cf }}</b></h6>
+          </ion-text>
+          <br>
+          <ion-text>
+            <h6 style="margin-top: 0px; margin-bottom: 0px;">
+              Richiedente: <b>{{ consulto.richiedente_cognome }} {{ consulto.richiedente_nome }}</b>
+            </h6>
+          </ion-text>
+          <br>
+          <ion-text>
+            <h6 style="margin-top: 0px">Data inizio: <b>{{ consulto.data_inizio }}</b></h6>
+          </ion-text>
+        </div>
+      </ion-card>
+
+    </div>
+
+
+  </ion-content>

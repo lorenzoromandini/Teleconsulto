@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Utente Non-Loggato
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/consulto']" routerDirection="forward">Chiudi</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header color="primary">
+      Entra nella riunione
+    </ion-card-header>
+    <ion-card-content padding>
+      <p>Inserisci l'ID e la password della riunione per entrare</p>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">ID Riunione</ion-label>
+          <ion-input type="text" [(ngModel)]="meetingNumber"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Password Riunione</ion-label>
+          <ion-input type="password" [(ngModel)]="meetingPassword"></ion-input>
+        </ion-item>
+      </ion-list>
+      <div>
+        <ion-button expand="full" (click)="joinMeeting()">
+          <ion-icon slot="start" name="videocam"></ion-icon>
+          Entra nella riunione
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar slot>
+      <ion-tab-button style="width: 100%;">
+        <ion-icon name="videocam-outline" color="primary"></ion-icon>
+        <ion-label color="primary">Non-Loggato</ion-label>
+      </ion-tab-button>
+      <ion-tab-button [routerLink]="['/zoom-login']" routerDirection="forward" style="width: 100%;">
+        <ion-icon name="chatbubble-ellipses-outline" color="main"></ion-icon>
+        <ion-label>Loggato</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>

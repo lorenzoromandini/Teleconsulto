@@ -1,0 +1,94 @@
+<ion-header style="margin-bottom: 15px;">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="padding-left: 10px;">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nuovo Consulto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div style="margin-left: 10px; margin-right: 10px;">
+
+    <ion-card style="margin-bottom: 25px;">
+      <ion-button [routerLink]="['/new-paziente']" routerDirection="forward" expand="block" style="margin: 0px; height: 50px;">
+        <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
+        ASSISTITO
+      </ion-button>
+      <ion-list style="padding: 0px;">
+        <ion-item *ngFor="let paziente of pazienti">
+        <ion-button (click)="rimuoviAssistitoAlert(paziente)" slot="end" expand="block" style="margin: 0px; height: 40px;">Rimuovi</ion-button>
+        <ion-grid style="padding-left: 0px; padding-right: 0px;">
+          <ion-row>
+            <ion-col style="padding-left: 0px; padding-right: 0px;">
+              <ion-label>{{ paziente.cognome }}</ion-label>
+            </ion-col>
+            <ion-col style="padding-left: 0px; padding-right: 0px;">
+              <ion-label>{{ paziente.nome }}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="padding-left: 0px; padding-right: 0px;">
+              <ion-label>{{ paziente.codice_fiscale }}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="padding-left: 0px ; padding-right: 0px;">
+              <ion-label>{{ paziente.data_nascita }}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      </ion-list>
+    </ion-card>
+
+    <ion-card style="margin-bottom: 25px;">
+      <ion-item lines="none">
+        <ion-label style="align-items: center; margin-bottom: 0px;">
+          <ion-item lines="none">
+          <ion-icon name="clipboard-outline" style="padding-right: 5px;" size="large"></ion-icon>
+          <ion-text class="card-title"><h2>OGGETTO DEL CONSULTO</h2></ion-text>
+        </ion-item>
+        </ion-label>
+      </ion-item>
+      <ion-card-content style="padding-top: 0px;">
+        <ion-item>
+          <ion-textarea autoGrow placeholder="Scrivi qui"></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-button [routerLink]="['/new-partecipant']" expand="block" style="margin: 0px; height: 50px">
+        <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>PARTECIPANTI
+      </ion-button>
+      <ion-list style="padding: 0px;">
+        <ion-item *ngFor="let partecipante of partecipanti">
+          <ion-button (click)="rimuoviPartecipanteAlert(partecipante)" slot="end" style="height: 40px;">Rimuovi</ion-button>
+          <ion-grid style="padding-top: 10px; padding-bottom: 10px;">
+            <ion-row style="padding-bottom: 6px;">
+              <ion-label>{{ partecipante.cognome }}</ion-label>
+            </ion-row>
+            <ion-row style="padding-bottom: 6px;">
+              <ion-label>{{ partecipante.codice_fiscale }}</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-label>{{ partecipante.professione }}</ion-label>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+    <br>
+
+    <ion-card>
+      <ion-button (click)="saveNuovoConsultoAlert()" [routerLink]="['/home']" expand="block" style="margin: 0px; height: 50px">
+        <ion-icon name="save-outline" slot="start" size="large"></ion-icon>SALVA
+      </ion-button>
+    </ion-card>
+
+  </div>
+
+</ion-content>

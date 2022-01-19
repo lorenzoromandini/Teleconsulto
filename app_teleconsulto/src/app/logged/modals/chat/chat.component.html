@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Chiudi</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let messaggio of messaggi">
+      <ion-col *ngIf="utenteCorrente != messaggio.mittente">
+        <b>{{ messaggio.mittente }}</b>
+        <br>
+        <span>{{ messaggio.messaggio }}</span>
+        <div class="time" text-right>
+          <br>
+          {{ messaggio.date_time | date: 'short'}}
+        </div>
+      </ion-col>
+      <ion-col *ngIf="utenteCorrente == messaggio.mittente">
+        <b>{{ messaggio.mittente }}</b>
+        <br>
+        <span>{{ messaggio.messaggio }}</span>
+        <div class="time" text-right>
+          <br>
+          {{ messaggio.date_time | date: 'short'}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size=8>
+        <textarea autosize [(ngModel)]="nuovo_messaggio" style="width: 100%;"></textarea>
+      </ion-col>
+        <ion-col>
+          <ion-button (click)="sendMessages()" [disabled]="nuovo_messaggio == ''">
+            <ion-icon name="send-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

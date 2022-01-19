@@ -1,0 +1,85 @@
+<ion-header style="margin-bottom: 20px;">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="padding-left: 10px;">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ paziente_cognome }} {{ paziente_nome }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div style="margin-left: 3%; margin-right: 3%;">
+
+    <div style="margin-bottom: 20px;">
+      <ion-card style="margin: 0px">
+        <ion-item lines="none">
+          <ion-label style="margin-top: 0px; margin-bottom: 0px;">
+            Codice fiscale:
+            <ion-text style="padding-left: 5px;">{{ paziente_cf }}</ion-text>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label style="margin-top: 0px; margin-bottom: 0px;">
+            Data nascita:
+            <ion-text style="padding-left: 5px;">{{ paziente_data_nascita }}</ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <div style="margin-bottom: 20px">
+      <ion-card style="height: auto; margin: 0px">
+        <h3 class="ion-text-center" style="margin-top: 15px; margin-bottom: 15px;">{{ oggetto }}</h3>
+      </ion-card>
+    </div>
+
+    <div>
+      <ion-card style="margin: 0px;">
+        <ion-card-header [ngClass]="partecipanti_flag ? 'header-aperto' : ''" class="ion-no-padding">
+          <ion-item (click)="partecipanti_flag = !partecipanti_flag" lines="none">
+            <ion-item lines="none" style="padding: 0px;">
+              <ion-icon [name]="!partecipanti_flag ? 'people-outline' : 'caret-down-outline'" size="large" slot="start"
+                color="main"></ion-icon>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-text>PARTECIPANTI</ion-text>
+            </ion-item>
+          </ion-item>
+        </ion-card-header>
+        <ion-card-content *ngIf="partecipanti_flag">
+          <ion-button (click)="openAddPartecipantModal()" expand="block" style="margin: 5px 0px 5px 0px; height: 50px;">
+            <ion-icon name="person-add-outline" style="padding-right: 5px" size="large"></ion-icon>
+            Aggiungi partecipanti
+          </ion-button>
+          <ion-list>
+            <ion-item *ngFor="let partecipante of partecipanti">
+              <ion-label>{{ partecipante.medico_cognome }} {{ partecipante.medico_nome }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar slot>
+      <ion-tab-button [routerLink]="['/zoom-non-login']" routerDirection="forward" style="width: 100%;">
+        <ion-icon name="videocam-outline" color="main"></ion-icon>
+        <ion-label>Videochiamata</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="openChat()" style="width: 100%;">
+        <ion-icon name="chatbubble-ellipses-outline" color="main"></ion-icon>
+        <ion-label>Chat</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="openAllegatiModal()" style="width: 100%;">
+        <ion-icon name="document-attach-outline" color="main"></ion-icon>
+        <ion-label>Allegati</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>

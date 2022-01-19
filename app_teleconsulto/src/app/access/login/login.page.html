@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid style="margin-bottom: 20px;">
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested placeholder="Email" type="text" [(ngModel)]="email"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested placeholder="Password" type="password" [(ngModel)]="password"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button (click)="tryLogin()" expand="block" [disabled]="disabledButton">
+        <ion-text>Accedi</ion-text>
+      </ion-button>
+      <br>
+      <ion-text>
+        Non sei ancora registrato ?
+      </ion-text>
+      <br>
+      <span (click)="openRegistration()">Clicca qui per procedere alla registrazione</span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

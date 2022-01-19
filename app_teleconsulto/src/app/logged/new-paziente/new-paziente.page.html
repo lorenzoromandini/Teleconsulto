@@ -1,0 +1,65 @@
+<ion-header style="margin-bottom: 15px;">
+  <ion-toolbar>
+    <ion-title>Aggiungi Assistito</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/nuovo']">Chiudi</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content style="padding: 13px;">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="5" style="padding: 0px">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Cognome</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col style="padding: 0px">
+            <ion-label>
+              <ion-item>
+                <ion-input></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5" style="padding: 0px">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Nome</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col style="padding: 0px">
+            <ion-label>
+              <ion-item>
+                <ion-input></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button (click)="searchPaziente()" expand="block" style="margin-top: 15px; height: 50px;">
+        <ion-icon name="search-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
+        Cerca
+      </ion-button>
+      <ion-list style="padding-top: 10px;">
+        <ion-item *ngFor="let paziente of pazienti">
+          <ion-button (click)="addPaziente(paziente)" slot="end" style="margin: 0px; height: 40px;">Aggiungi</ion-button>
+          <ion-grid style="padding-left: 0px; padding-right: 10px;">
+            <ion-row>
+              <ion-label>{{ paziente.cognome }} {{ paziente.nome }}</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-label>{{ paziente.codice_fiscale }}</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-label>{{ paziente.data_nascita }}</ion-label>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

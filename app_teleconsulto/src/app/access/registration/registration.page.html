@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" style="padding-left: 10px;">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrazione</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid style="margin-bottom: 20px;">
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Nome</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested placeholder="Mario" [(ngModel)]="nome"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Cognome</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested placeholder="Rossi" [(ngModel)]="cognome"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Codice Fiscale</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested [(ngModel)]="codice_fiscale" minlength=16, maxlength=16></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Gender</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-select interface="popover" [(ngModel)]="gender">
+                  <ion-select-option value="m">M</ion-select-option>
+                  <ion-select-option value="f">F</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Data nascita</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-datetime requested displayFormat="DD-MM-YYYY" min="1921-01-01" max="2002-12-31"
+                  [(ngModel)]="data_nascita" placeholder="gg-mm-aaaa">
+                </ion-datetime>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Professione</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input placeholder="Cardiologo" [(ngModel)]="professione"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Email</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested type="text" placeholder="mario.rossi@gmail.com" [(ngModel)]="email"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Password</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested type="password" [(ngModel)]="password"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Conferma password</ion-text>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <ion-item>
+                <ion-input requested type="password" [(ngModel)]="conferma_password"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button (click)="tryRegister()" expand="block" [disabled]="disabledButton">
+        <ion-text>Registrati</ion-text>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
