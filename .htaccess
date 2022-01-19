@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^api/medici/?$ api/medico.php
+RewriteRule ^api/medici/([0-9]+)?$ api/medico.php?id=$1
+
+RewriteRule ^api/pazienti/?$ api/paziente.php
+RewriteRule ^api/pazienti/([0-9]+)?$ api/paziente.php?id=$1
+
+RewriteRule ^api/consulti/?$ api/consulto.php
+RewriteRule ^api/consulti/([0-9]+)?$ api/consulto.php?id=$1
