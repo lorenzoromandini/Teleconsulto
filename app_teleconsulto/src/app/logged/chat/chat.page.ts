@@ -70,7 +70,7 @@ export class ChatPage {
         request: "send_message",
         id_consulto: this.consulto_id,
         id_utente: this.id_utente,
-        messaggio: this.nuovo_messaggio,
+        testo: this.nuovo_messaggio,
       }
 
       console.log(body)
