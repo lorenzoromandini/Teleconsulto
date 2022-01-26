@@ -15,7 +15,7 @@
       <ion-col *ngIf="utenteCorrente != messaggio.mittente_id">
         <b>{{ messaggio.mittente_cognome }} {{ messaggio.mittente_cognome }}</b>
         <br>
-        <span>{{ messaggio.messaggio }}</span>
+        <span>{{ messaggio.testo }}</span>
         <div class="time" text-right>
           <br>
           {{ messaggio.data_ora | date: 'short'}}
