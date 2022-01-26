@@ -229,8 +229,8 @@ if ($postjson['request'] == "process_register") {
     echo $result;
 } elseif ($postjson['request'] == "load_messages") {
 
-    $query = mysqli_query($mysqli, "SELECT medico.id AS mittente_id, medico.nome AS mittente_nome, medico.cognome AS mittente_cognome, messaggio, data_ora 
-    FROM chat, medico WHERE id_consulto = '$postjson[id_consulto]' AND medico.id = chat.id_medico ORDER BY data_ora");
+    $query = mysqli_query($mysqli, "SELECT medico.id AS mittente_id, medico.nome AS mittente_nome, medico.cognome AS mittente_cognome, testo, data_ora 
+    FROM messaggi, medico WHERE id_consulto = '$postjson[id_consulto]' AND medico.id = messaggi.id_medico ORDER BY data_ora");
 
     while ($rows = mysqli_fetch_array($query)) {
 
@@ -238,7 +238,7 @@ if ($postjson['request'] == "process_register") {
             'mittente_id' => $rows['mittente_id'],
             'mittente_nome' => $rows['mittente_nome'],
             'mittente_cognome' => $rows['mittente_cognome'],
-            'messaggio' => $rows['messaggio'],
+            'testo' => $rows['testo'],
             'data_ora' => $rows['data_ora'],
         );
     }
@@ -252,10 +252,10 @@ if ($postjson['request'] == "process_register") {
     echo $result;
 } elseif ($postjson['request'] == "send_message") {
 
-    $insert = mysqli_query($mysqli, "INSERT INTO chat SET
+    $insert = mysqli_query($mysqli, "INSERT INTO messaggi SET
     id_medico = '$postjson[id_utente]',
     id_consulto = '$postjson[id_consulto]',
-    messaggio = '$postjson[messaggio]'
+    testo = '$postjson[testo]'
     ");
 
     if ($insert) {
@@ -267,7 +267,7 @@ if ($postjson['request'] == "process_register") {
     echo $result;
 } elseif ($postjson['request'] == "delete_message") {
 
-    $query = mysqli_query($mysqli, "DELETE * FROM chat WHERE chat.id_medico = '$postjson[id]' ");
+    $query = mysqli_query($mysqli, "DELETE * FROM messaggi WHERE messaggi.id_medico = '$postjson[id]' ");
 
     if ($query) {
         $result = json_encode(array('success' => true));
