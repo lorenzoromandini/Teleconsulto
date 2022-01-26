@@ -18,5 +18,3 @@ import { ChatPage } from './chat.page';
   declarations: [ChatPage]
 })
 export class ChatPageModule {}
-
-//commento
