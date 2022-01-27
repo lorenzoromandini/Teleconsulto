@@ -52,6 +52,7 @@ export class ConsultoPage implements OnInit {
   }
 
   async loadPartecipanti() {
+    this.partecipanti = [];
     return new Promise(resolve => {
       let body = {
         request: "load_partecipanti",
@@ -67,6 +68,8 @@ export class ConsultoPage implements OnInit {
     })
   }
 
+  /*
+
   async openAddPartecipantModal() {
     const modal = await this.modalController.create({
       component: AddPartecipantsComponent
@@ -74,6 +77,7 @@ export class ConsultoPage implements OnInit {
 
     await modal.present();
   }
+  */
 
   async openAllegatiModal() {
     const modal = await this.modalController.create({

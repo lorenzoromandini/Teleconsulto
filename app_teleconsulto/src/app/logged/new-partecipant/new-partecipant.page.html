@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Aggiungi Partecipanti</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/nuovo']">Chiudi</ion-button>
+      <ion-back-button text="Chiudi" icon=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -62,7 +62,7 @@
       </ion-button>
       <ion-list>
         <ion-item *ngFor="let partecipante of partecipanti">
-          <ion-button (click)="addPartecipante(partecipante)" slot="end" style="margin: 0px; height: 40px;">Aggiungi</ion-button>
+          <ion-button slot="end" style="margin: 0px; height: 40px;">Aggiungi</ion-button>
           <ion-grid style="padding-left: 0px;">
             <ion-row>
               <ion-label>{{ partecipante.cognome }} {{ partecipante.nome }}</ion-label>

@@ -16,11 +16,19 @@ export class NuovoPage {
   pazienti: Array<Paziente> = [];
   partecipante: Medico;
   partecipanti: Array<Medico> = [];
+  oggetto: String = "";
+
+  boolSalva: boolean = false;
+  boolPaziente: boolean = false;
 
   constructor(
     private alertController: AlertController,
     private route: ActivatedRoute,
   ) { }
+
+  ionViewWillEnter() {
+    this.pazienti = [];
+  }
 
   ionViewDidEnter() {
     this.route.queryParams.subscribe(params => {
@@ -29,11 +37,7 @@ export class NuovoPage {
       this.pazienti.push(this.paziente)
       console.log(this.pazienti)
     })
-    this.route.queryParams.subscribe(params => {
-      this.partecipante = JSON.parse(params["partecipante"]);
-      console.log(this.partecipanti)
-      this.partecipanti.push(this.partecipante)
-    })
+    this.checkSalva();
   }
 
   async saveNuovoConsultoAlert() {
@@ -55,7 +59,7 @@ export class NuovoPage {
         {
           text: 'SÌ',
           handler: () => {
-            this.rimuoviAssistito(paziente);
+            this.rimuoviAssistito();
           }
         }, {
           text: 'No',
@@ -67,39 +71,26 @@ export class NuovoPage {
     await alert.onDidDismiss();
   }
 
-
-  async rimuoviPartecipanteAlert(partecipante: Medico) {
-    const alert = await this.alertController.create({
-      header: "Rimuovi",
-      message: "Sei sicuro di voler rimuovere il partecipante ?",
-      buttons: [
-        {
-          text: 'SÌ',
-          handler: () => {
-            this.rimuoviPartecipante(partecipante);
-          }
-        }, {
-          text: 'No',
-        }
-      ]
-    });
-
-    await alert.present();
-    await alert.onDidDismiss();
+  rimuoviAssistito() {
+    this.pazienti = [];
+    this.checkSalva();
   }
 
-  rimuoviAssistito(paziente: Paziente) {
-    let index = this.pazienti.indexOf(paziente);
+  checkSalva() {
+    if (this.checkPaziente() && this.oggetto != "") {
+      this.boolSalva = true;
+    }
+    else this.boolSalva = false;
 
-    if (index > -1)
-      this.pazienti.splice(index, 1)
+    return this.boolSalva;
   }
 
-  rimuoviPartecipante(partecipante: Medico) {
-    let index = this.partecipanti.indexOf(partecipante);
+  checkPaziente() {
+    if (this.pazienti.length == 1) {
+      this.boolPaziente = true;
+    } else this.boolPaziente = false;
 
-    if (index > -1)
-      this.partecipanti.splice(index, 1)
+    return this.boolPaziente;
   }
 
 

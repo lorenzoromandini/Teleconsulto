@@ -29,6 +29,10 @@ export class ChatPage {
     private accessProviders: AccessProviders
   ) { }
 
+  ionViewWillEnter() {
+    this.messaggi = [];
+  }
+
   ionViewDidEnter() {
     this.route.queryParams.subscribe(params => {
       this.consulto_id = JSON.parse(params["id_consulto"]);
@@ -91,7 +95,9 @@ export class ChatPage {
       setTimeout(() => {
         this.content.scrollToBottom(200);
       });
-    })
+      this.ionViewWillEnter();
+      this.ionViewDidEnter();
+    });
   }
 
   async presentToast(text) {

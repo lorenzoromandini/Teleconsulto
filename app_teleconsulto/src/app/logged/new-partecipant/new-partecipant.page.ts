@@ -38,6 +38,8 @@ export class NewPartecipantPage {
     })
   }
 
+  /*
+
   addPartecipante(partecipante: any) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
@@ -46,6 +48,7 @@ export class NewPartecipantPage {
     };
     this.router.navigate(['/nuovo'], navigationExtras);
   }
+  */
 
 
 }

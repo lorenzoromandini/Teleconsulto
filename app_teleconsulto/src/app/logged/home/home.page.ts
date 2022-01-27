@@ -26,6 +26,10 @@ export class HomePage {
     private storage: Storage
   ) { }
 
+  ionViewWillEnter() {
+    this.consulti = [];
+  }
+
   ionViewDidEnter() {
     this.storage.get('storage_xxx').then((res) => {
       this.datastorage = res;
@@ -40,6 +44,7 @@ export class HomePage {
     })
     loader.present();
 
+    this.ionViewWillEnter();
     this.ionViewDidEnter();
     event.target.complete();
 
@@ -91,7 +96,6 @@ export class HomePage {
     };
     this.router.navigate(['/consulto'], navigationExtras);
   }
-
 
 }
 

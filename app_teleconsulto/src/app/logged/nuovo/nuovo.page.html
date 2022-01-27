@@ -12,10 +12,15 @@
   <div style="margin-left: 10px; margin-right: 10px;">
 
     <ion-card style="margin-bottom: 25px;">
-      <ion-button [routerLink]="['/new-paziente']" routerDirection="forward" expand="block" style="margin: 0px; height: 50px;">
+      <ion-button *ngIf="!boolPaziente" [routerLink]="['/new-paziente']" routerDirection="forward" expand="block" style="margin: 0px; height: 50px;">
         <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
         ASSISTITO
       </ion-button>
+      <ion-button *ngIf="boolPaziente" color="medium" expand="block" style="margin: 0px; height: 50px;">
+        <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
+        ASSISTITO
+      </ion-button>
+
       <ion-list style="padding: 0px;">
         <ion-item *ngFor="let paziente of pazienti">
         <ion-button (click)="rimuoviAssistitoAlert(paziente)" slot="end" expand="block" style="margin: 0px; height: 40px;">Rimuovi</ion-button>
@@ -54,7 +59,7 @@
       </ion-item>
       <ion-card-content style="padding-top: 0px;">
         <ion-item>
-          <ion-textarea autoGrow placeholder="Scrivi qui"></ion-textarea>
+          <ion-textarea autoGrow placeholder="Scrivi qui" type="text" [(ngModel)]="oggetto"></ion-textarea>
         </ion-item>
       </ion-card-content>
     </ion-card>
@@ -84,7 +89,11 @@
     <br>
 
     <ion-card>
-      <ion-button (click)="saveNuovoConsultoAlert()" [routerLink]="['/home']" expand="block" style="margin: 0px; height: 50px">
+      
+      <ion-button *ngIf="boolSalva" (click)="saveNuovoConsultoAlert()" [routerLink]="['/home']" expand="block" style="margin: 0px; height: 50px">
+        <ion-icon name="save-outline" slot="start" size="large"></ion-icon>SALVA
+      </ion-button>
+      <ion-button *ngIf="!boolSalva" color="medium" expand="block" style="margin: 0px; height: 50px">
         <ion-icon name="save-outline" slot="start" size="large"></ion-icon>SALVA
       </ion-button>
     </ion-card>
