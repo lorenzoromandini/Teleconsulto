@@ -54,7 +54,7 @@ export class ProfilePage implements OnInit {
 
   async updateProfileAlert() {
     const alert = await this.alertCtrl.create({
-      header: "Vuoi aggiornare le tue credenziali ? Se Sì, verrà effettuato il Logout",
+      header: "Vuoi modificare la password ? Se Sì, verrà effettuato il Logout",
       backdropDismiss: false,
       buttons: [
         {

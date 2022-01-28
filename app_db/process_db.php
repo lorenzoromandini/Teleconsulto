@@ -146,7 +146,7 @@ if ($postjson['request'] == "process_register") {
 } elseif ($postjson['request'] == "search_partecipants") {
 
     $query = mysqli_query($mysqli, "SELECT id, cognome, nome, codice_fiscale, professione FROM medico WHERE cognome LIKE '%$postjson[medico_cognome]%' 
-    AND nome LIKE '%$postjson[medico_nome]%' AND professione LIKE '%$postjson[medico_professione]%' ORDER BY cognome, nome; ");
+    AND nome LIKE '%$postjson[medico_nome]%' AND professione LIKE '%$postjson[medico_professione]%' ORDER BY cognome, nome");
 
     while ($rows = mysqli_fetch_array($query)) {
 
@@ -169,7 +169,7 @@ if ($postjson['request'] == "process_register") {
 } elseif ($postjson['request'] == "search_paziente") {
 
     $query = mysqli_query($mysqli, "SELECT id, cognome, nome, codice_fiscale, data_nascita FROM paziente 
-    WHERE cognome LIKE '%$postjson[paziente_cognome]%' AND nome LIKE '%$postjson[paziente_nome]%' ORDER BY cognome, nome; ");
+    WHERE cognome LIKE '%$postjson[paziente_cognome]%' AND nome LIKE '%$postjson[paziente_nome]%' ORDER BY cognome, nome");
 
     while ($rows = mysqli_fetch_array($query)) {
 

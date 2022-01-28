@@ -20,6 +20,7 @@ export class NewPazientePage {
   ) { }
 
   async searchPaziente() {
+    this.pazienti = [];
     return new Promise(resolve => {
       let body = {
         request: "search_paziente",

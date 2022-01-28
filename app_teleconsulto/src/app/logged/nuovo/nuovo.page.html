@@ -16,7 +16,7 @@
         <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
         ASSISTITO
       </ion-button>
-      <ion-button *ngIf="boolPaziente" color="medium" expand="block" style="margin: 0px; height: 50px;">
+      <ion-button *ngIf="boolPaziente" [disabled]="disabledButton" color="medium" expand="block" style="margin: 0px; height: 50px;">
         <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
         ASSISTITO
       </ion-button>
@@ -65,35 +65,10 @@
     </ion-card>
 
     <ion-card>
-      <ion-button [routerLink]="['/new-partecipant']" expand="block" style="margin: 0px; height: 50px">
-        <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>PARTECIPANTI
-      </ion-button>
-      <ion-list style="padding: 0px;">
-        <ion-item *ngFor="let partecipante of partecipanti">
-          <ion-button (click)="rimuoviPartecipanteAlert(partecipante)" slot="end" style="height: 40px;">Rimuovi</ion-button>
-          <ion-grid style="padding-top: 10px; padding-bottom: 10px;">
-            <ion-row style="padding-bottom: 6px;">
-              <ion-label>{{ partecipante.cognome }}</ion-label>
-            </ion-row>
-            <ion-row style="padding-bottom: 6px;">
-              <ion-label>{{ partecipante.codice_fiscale }}</ion-label>
-            </ion-row>
-            <ion-row>
-              <ion-label>{{ partecipante.professione }}</ion-label>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-
-    <br>
-
-    <ion-card>
-      
       <ion-button *ngIf="boolSalva" (click)="saveNuovoConsultoAlert()" [routerLink]="['/home']" expand="block" style="margin: 0px; height: 50px">
         <ion-icon name="save-outline" slot="start" size="large"></ion-icon>SALVA
       </ion-button>
-      <ion-button *ngIf="!boolSalva" color="medium" expand="block" style="margin: 0px; height: 50px">
+      <ion-button *ngIf="!boolSalva" [disabled]="disabledButton" color="medium" expand="block" style="margin: 0px; height: 50px">
         <ion-icon name="save-outline" slot="start" size="large"></ion-icon>SALVA
       </ion-button>
     </ion-card>

@@ -48,7 +48,7 @@
           </ion-item>
         </ion-card-header>
         <ion-card-content *ngIf="partecipanti_flag">
-          <ion-button [routerLink]="['/new-partecipant']" expand="block" style="margin: 5px 0px 5px 0px; height: 50px;">
+          <ion-button (click)="openAddPartecipante()" expand="block" style="margin: 5px 0px 5px 0px; height: 50px;">
             <ion-icon name="person-add-outline" style="padding-right: 5px" size="large"></ion-icon>
             Aggiungi partecipanti
           </ion-button>

@@ -68,6 +68,15 @@ export class ConsultoPage implements OnInit {
     })
   }
 
+  openAddPartecipante() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        consulto_id: JSON.stringify(this.consulto_id),
+      }
+    };
+    this.router.navigate(['/new-partecipant'], navigationExtras);
+  }
+
   /*
 
   async openAddPartecipantModal() {

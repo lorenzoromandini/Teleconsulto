@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { Medico } from 'src/app/models/medico';
+import { ActivatedRoute } from '@angular/router';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { AccessProviders } from 'src/app/providers/access-providers';
 
 @Component({
@@ -14,13 +14,24 @@ export class NewPartecipantPage {
   partecipante_cognome: string = "";
   partecipante_nome: string = "";
   partecipante_professione: string = "";
+  consulto_id: string;
 
   constructor(
-    private router: Router,
-    private accessProviders: AccessProviders
+    private accessProviders: AccessProviders,
+    private route: ActivatedRoute,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
   ) { }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.consulto_id = JSON.parse(params["consulto_id"]);
+      console.log(this.consulto_id);
+    })
+  }
+
   async searchPartecipants() {
+    this.partecipanti = [];
     return new Promise(resolve => {
       let body = {
         request: "search_partecipants",
@@ -36,6 +47,45 @@ export class NewPartecipantPage {
         resolve(true);
       })
     })
+  }
+
+  async AddPartecipante(medico: any) {
+    const loader = await this.loadingCtrl.create({
+      message: "Aggiunta partecipante..."
+    });
+    loader.present();
+
+    return new Promise(resolve => {
+      let body = {
+        request: "",
+        id_consulto: this.consulto_id,
+        id_utente: "",
+        testo: "",
+      }
+
+      console.log(body)
+
+      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+        if (res.success == true) {
+          console.log(res.success)
+          loader.dismiss();
+          resolve(true);
+        }
+        else {
+          loader.dismiss();
+          this.presentToast(res.msg);
+        }
+      })
+    });
+
+  }
+
+  async presentToast(text) {
+    const toast = await this.toastCtrl.create({
+      message: text,
+      duration: 1500,
+    });
+    toast.present();
   }
 
   /*
