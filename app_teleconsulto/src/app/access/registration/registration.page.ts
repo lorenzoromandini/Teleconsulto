@@ -19,6 +19,8 @@ export class RegistrationPage {
   email: string = "";
   password: string = "";
   conferma_password: string = "";
+  regexpEmail: any = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  regexpCF: any = new RegExp(/^(?:[A-Z][AEIOU][AEIOUX]|[AEIOU]X{2}|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}(?:[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[15MR][\dLMNP-V]|[26NS][0-8LMNP-U])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM]|[AC-EHLMPR-T][26NS][9V])|(?:[02468LNQSU][048LQU]|[13579MPRTV][26NS])B[26NS][9V])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$/i);
 
   disabledButton;
 
@@ -40,13 +42,13 @@ export class RegistrationPage {
       this.presentToast("Devi inserire il tuo Nome");
     } else if (this.cognome.length < 1) {
       this.presentToast("Devi inserire il tuo Cognome");
-    } else if (this.codice_fiscale.length != 16) {
+    } else if (!this.regexpCF.test(this.codice_fiscale)) {
       this.presentToast("Devi inserire il tuo Codice Fiscale corretto");
     } else if (this.gender == "") {
       this.presentToast("Devi inserire il tuo Gender");
     } else if (this.data_nascita == "") {
       this.presentToast("Devi inserire la tua Data di nascita");
-    } else if (this.email.length < 5 || !this.email.includes('@')) {
+    } else if (!this.regexpEmail.test(this.email)) {
       this.presentToast("Devi inserire una Email corretta");
     } else if (this.password.length < 6) {
       this.presentToast("Devi inserire una Password di almeno 6 caratteri");

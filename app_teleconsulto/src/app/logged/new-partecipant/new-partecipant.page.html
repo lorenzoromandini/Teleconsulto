@@ -61,8 +61,9 @@
         Cerca
       </ion-button>
       <ion-list>
-        <ion-item *ngFor="let partecipante of partecipanti">
-          <ion-button slot="end" style="margin: 0px; height: 40px;">Aggiungi</ion-button>
+        <ion-item *ngFor="let partecipante of partecipantiSearchList">
+          <ion-button *ngIf="!partecipante.boolPartecipante" (click)="addPartecipante(partecipante.id)" slot="end" style="margin: 0px; height: 40px;">Aggiungi</ion-button>
+          <ion-button *ngIf="partecipante.boolPartecipante" disabled color="medium" slot="end" style="margin: 0px; height: 40px;">Aggiungi</ion-button>
           <ion-grid style="padding-left: 0px;">
             <ion-row>
               <ion-label>{{ partecipante.cognome }} {{ partecipante.nome }}</ion-label>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AccessProviders } from 'src/app/providers/access-providers';
 
 @Component({
@@ -10,17 +10,19 @@ import { AccessProviders } from 'src/app/providers/access-providers';
 })
 export class NewPartecipantPage {
 
-  partecipanti: any = [];
+  partecipantiSearchList: any = [];
   partecipante_cognome: string = "";
   partecipante_nome: string = "";
   partecipante_professione: string = "";
   consulto_id: string;
+  partecipanti: any = [];
 
   constructor(
     private accessProviders: AccessProviders,
     private route: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
+    public navCtrl: NavController,
   ) { }
 
   ngOnInit() {
@@ -28,10 +30,14 @@ export class NewPartecipantPage {
       this.consulto_id = JSON.parse(params["consulto_id"]);
       console.log(this.consulto_id);
     })
+    this.route.queryParams.subscribe(params => {
+      this.partecipanti = JSON.parse(params["partecipanti"]);
+      console.log(this.partecipanti);
+    })
   }
 
   async searchPartecipants() {
-    this.partecipanti = [];
+    this.partecipantiSearchList = [];
     return new Promise(resolve => {
       let body = {
         request: "search_partecipants",
@@ -42,14 +48,25 @@ export class NewPartecipantPage {
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         for (let datas of res.result) {
-          this.partecipanti.push(datas);
+          this.partecipantiSearchList.push(datas);
         }
+        this.checkPartecipante();
         resolve(true);
       })
     })
   }
 
-  async AddPartecipante(medico: any) {
+  checkPartecipante() {
+    for (var elementoLista of this.partecipantiSearchList) {
+      for (var index of this.partecipanti) {
+        if (elementoLista.id == index.medico_id) {
+          elementoLista.boolPartecipante = true;
+        }
+      }
+    }
+  }
+
+  async addPartecipante(medico_id: string) {
     const loader = await this.loadingCtrl.create({
       message: "Aggiunta partecipante..."
     });
@@ -57,13 +74,11 @@ export class NewPartecipantPage {
 
     return new Promise(resolve => {
       let body = {
-        request: "",
+        request: "add_partecipante",
         id_consulto: this.consulto_id,
-        id_utente: "",
-        testo: "",
+        id_partecipante: medico_id,
+        richiedente: "false",
       }
-
-      console.log(body)
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         if (res.success == true) {
@@ -76,6 +91,7 @@ export class NewPartecipantPage {
           this.presentToast(res.msg);
         }
       })
+      this.navCtrl.back();
     });
 
   }
@@ -87,18 +103,6 @@ export class NewPartecipantPage {
     });
     toast.present();
   }
-
-  /*
-
-  addPartecipante(partecipante: any) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        partecipante: JSON.stringify(partecipante),
-      }
-    };
-    this.router.navigate(['/nuovo'], navigationExtras);
-  }
-  */
 
 
 }

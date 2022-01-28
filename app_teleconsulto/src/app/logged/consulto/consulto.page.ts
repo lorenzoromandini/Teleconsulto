@@ -65,6 +65,7 @@ export class ConsultoPage implements OnInit {
         }
         resolve(true);
       })
+      console.log(this.partecipanti)
     })
   }
 
@@ -72,6 +73,7 @@ export class ConsultoPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       queryParams: {
         consulto_id: JSON.stringify(this.consulto_id),
+        partecipanti: JSON.stringify(this.partecipanti)
       }
     };
     this.router.navigate(['/new-partecipant'], navigationExtras);

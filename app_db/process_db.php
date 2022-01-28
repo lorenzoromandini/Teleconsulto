@@ -90,13 +90,14 @@ if ($postjson['request'] == "process_register") {
     echo $result;
 } elseif ($postjson['request'] == "load_partecipanti") {
 
-    $query = mysqli_query($mysqli, "SELECT medico.cognome AS medico_cognome, medico.nome AS medico_nome 
+    $query = mysqli_query($mysqli, "SELECT medico.id AS medico_id, medico.cognome AS medico_cognome, medico.nome AS medico_nome 
     FROM consulto, medico, partecipanti WHERE consulto.id = '$postjson[id_consulto]' AND consulto.id = partecipanti.id_consulto 
     AND partecipanti.id_medico = medico.id ORDER BY medico_cognome ");
 
     while ($rows = mysqli_fetch_array($query)) {
 
         $data[] = array(
+            'medico_id' => $rows['medico_id'],
             'medico_cognome' => $rows['medico_cognome'],
             'medico_nome' => $rows['medico_nome'],
         );
@@ -109,6 +110,7 @@ if ($postjson['request'] == "process_register") {
     }
 
     echo $result;
+
 } elseif ($postjson['request'] == "update_profile") {
 
     $checkemail = mysqli_fetch_array(mysqli_query($mysqli, "SELECT email FROM medico WHERE id != '$postjson[id]' "));
@@ -156,6 +158,7 @@ if ($postjson['request'] == "process_register") {
             'nome' => $rows['nome'],
             'codice_fiscale' => $rows['codice_fiscale'],
             'professione' => $rows['professione'],
+            'boolPartecipante' => false
         );
     }
 
@@ -227,6 +230,59 @@ if ($postjson['request'] == "process_register") {
     }
 
     echo $result;
+
+} elseif ($postjson['request'] == "nuovo_consulto") {
+
+    $insert = mysqli_query($mysqli, "INSERT INTO consulto SET
+    id = '$postjson[id_consulto]',
+    oggetto = '$postjson[oggetto]',
+    paziente = '$postjson[paziente]',
+    ");
+
+    if ($insert) {
+        $result = json_encode(array('success' => true));
+    } else {
+        $result = json_encode(array('success' => false, 'msg' => "Errore nell'inserimento di un nuovo consulto"));
+    }
+
+    echo $result;
+
+}
+
+elseif ($postjson['request'] == "nuovo_consultoPartecipante") {
+
+    $insert = mysqli_query($mysqli, "INSERT INTO partecipanti SET
+    id_medico = '$postjson[id_medico]',
+    id_consulto = '$postjson[id_consulto]',
+    richiedente = '$postjson[richiedente]'
+    ");
+
+    if ($insert) {
+        $result = json_encode(array('success' => true));
+    } else {
+        $result = json_encode(array('success' => false, 'msg' => "Errore nell'inserimento del richiedente"));
+    }
+
+    echo $result;
+
+}
+
+elseif ($postjson['request'] == "add_partecipante") {
+
+    $insert = mysqli_query($mysqli, "INSERT INTO partecipanti SET
+    id_medico = '$postjson[id_partecipante]',
+    id_consulto = '$postjson[id_consulto]',
+    richiedente = '$postjson[richiedente]'
+    ");
+
+    if ($insert) {
+        $result = json_encode(array('success' => true));
+    } else {
+        $result = json_encode(array('success' => false, 'msg' => "Errore nell'inserimento di un nuovo partecipante"));
+    }
+
+    echo $result;
+
 } elseif ($postjson['request'] == "load_messages") {
 
     $query = mysqli_query($mysqli, "SELECT medico.id AS mittente_id, medico.nome AS mittente_nome, medico.cognome AS mittente_cognome, testo, data_ora 
