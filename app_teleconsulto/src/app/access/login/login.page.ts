@@ -13,7 +13,7 @@ export class LoginPage {
 
   email: string = "";
   password: string = "";
-
+  regexpEmail: any = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   disabledButton;
 
   constructor(
@@ -30,10 +30,10 @@ export class LoginPage {
   }
 
   async tryLogin() {
-    if (this.email == "") {
-      this.presentToast("Email non inserita");
-    } else if (this.password == "") {
-      this.presentToast("Password non inserita");
+    if (!this.regexpEmail.test(this.email)) {
+      this.presentToast("Devi inserire una Email corretta");
+    } else if (this.password.length < 6 ) {
+      this.presentToast("Devi inserire una Password di almeno 6 caratteri");
     } else {
       this.disabledButton = true;
       const loader = await this.loadingCtrl.create({

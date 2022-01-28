@@ -21,12 +21,11 @@ export class ProfilePage implements OnInit {
   professione: string;
   email: string;
   password: string = "";
-
-  disabledButton;
+  conferma_password: string = "";
+  boolModificaPassword: boolean = false;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
@@ -45,11 +44,8 @@ export class ProfilePage implements OnInit {
       this.data_nascita = this.datastorage.data_nascita;
       this.gender = this.datastorage.gender;
       this.email = this.datastorage.email;
+      this.professione = this.datastorage.professione;
     })
-  }
-
-  ionViewDidEnter() {
-    this.disabledButton = false;
   }
 
   async updateProfileAlert() {
@@ -71,10 +67,10 @@ export class ProfilePage implements OnInit {
   }
 
   async updateProfile() {
-    if (this.email.length < 5 || !this.email.includes('@')) {
+    if (this.password.length < 5 || !this.email.includes('@')) {
       this.presentToast("Devi inserire una Email corretta");
     } else {
-      this.disabledButton = true;
+      this.boolModificaPassword = true;
       const loader = await this.loadingCtrl.create({
         message: "Attendi..."
       });
@@ -97,12 +93,12 @@ export class ProfilePage implements OnInit {
         this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
           if (res.success == true) {
             loader.dismiss();
-            this.disabledButton = false;
+            this.boolModificaPassword = false;
             this.presentToast(res.msg);
             this.router.navigate(['/login']);
           } else {
             loader.dismiss();
-            this.disabledButton = false;
+            this.boolModificaPassword = false;
             this.presentToast(res.msg);
           }
         })

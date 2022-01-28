@@ -1,10 +1,6 @@
-import { Consulto } from '../../models/consulto';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AllegatiComponent } from '../modals/allegati/allegati.component';
-import { AddPartecipantsComponent } from '../modals/add-partecipants/add-partecipants.component';
-import { Paziente } from '../../models/paziente';
-import { ChatComponent } from '../modals/chat/chat.component';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AccessProviders } from 'src/app/providers/access-providers';
 
@@ -42,12 +38,10 @@ export class ConsultoPage implements OnInit {
       this.paziente_cf = this.consulto.paziente_cf;
       this.paziente_data_nascita = this.consulto.paziente_data_nascita;
       this.oggetto = this.consulto.oggetto;
-      console.log(this.consulto)
       this.loadPartecipanti();
     })
     this.route.queryParams.subscribe(params => {
       this.id_utente = JSON.parse(params["id_utente"]);
-      console.log(this.id_utente)
     })
   }
 
@@ -65,7 +59,6 @@ export class ConsultoPage implements OnInit {
         }
         resolve(true);
       })
-      console.log(this.partecipanti)
     })
   }
 
@@ -78,17 +71,6 @@ export class ConsultoPage implements OnInit {
     };
     this.router.navigate(['/new-partecipant'], navigationExtras);
   }
-
-  /*
-
-  async openAddPartecipantModal() {
-    const modal = await this.modalController.create({
-      component: AddPartecipantsComponent
-    });
-
-    await modal.present();
-  }
-  */
 
   async openAllegatiModal() {
     const modal = await this.modalController.create({
