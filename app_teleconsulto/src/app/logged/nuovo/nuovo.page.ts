@@ -25,7 +25,7 @@ export class NuovoPage {
 
   boolSalva: boolean = false;
   boolPaziente: boolean = false;
-  consultoID = "";
+  consultoID: string = "";
 
   constructor(
     private router: Router,

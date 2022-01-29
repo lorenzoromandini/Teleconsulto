@@ -48,7 +48,7 @@ export class ProfilePage implements OnInit {
     })
   }
 
-  async updateProfileAlert() {
+  async updatePasswordAlert() {
     const alert = await this.alertCtrl.create({
       header: "Vuoi modificare la password ? Se Sì, verrà effettuato il Logout",
       backdropDismiss: false,
@@ -64,6 +64,9 @@ export class ProfilePage implements OnInit {
         }
       ]
     });
+
+    await alert.present();
+    await alert.onDidDismiss();
   }
 
   async updatePassword() {

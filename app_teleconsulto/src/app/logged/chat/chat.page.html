@@ -20,7 +20,7 @@
           {{ messaggio.data_ora | date: 'short'}}
         </div>
       </ion-col>
-      <ion-col offset='3' size='9' *ngIf="utenteCorrente == messaggio.mittente_id" class="message my-message">
+      <ion-col offset='3' size='9' *ngIf="utenteCorrente == messaggio.mittente_id" (click)="deleteMessageAlert(messaggio.id_messaggio)" class="message my-message">
         <b>{{ messaggio.mittente_cognome }} {{ messaggio.mittente_cognome }}</b>
         <br>
         <span>{{ messaggio.testo }}</span>
