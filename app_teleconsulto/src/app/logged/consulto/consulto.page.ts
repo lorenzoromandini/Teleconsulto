@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { AllegatiComponent } from '../modals/allegati/allegati.component';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AccessProviders } from 'src/app/providers/access-providers';
-
 
 @Component({
   selector: 'app-consulto',
@@ -12,6 +11,7 @@ import { AccessProviders } from 'src/app/providers/access-providers';
 })
 export class ConsultoPage implements OnInit {
 
+  datastorage: any;
   partecipanti: any = [];
   consulto: any;
   paziente_nome: string;
@@ -21,12 +21,16 @@ export class ConsultoPage implements OnInit {
   oggetto: string;
   consulto_id: string;
   id_utente: string;
+  boolRichiedente: boolean = false;
 
   constructor(
     private router: Router,
     private modalController: ModalController,
     private route: ActivatedRoute,
-    private accessProviders: AccessProviders
+    private accessProviders: AccessProviders,
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -57,9 +61,59 @@ export class ConsultoPage implements OnInit {
         for (let datas of res.result) {
           this.partecipanti.push(datas);
         }
+        console.log(this.partecipanti)
+        this.checkRichiedente();
         resolve(true);
       })
     })
+  }
+  
+  async removePartecipanteAlert(partecipante_id: string) {
+    const alert = await this.alertCtrl.create({
+      header: "Vuoi rimuovere questo partecipante?",
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Sì',
+          handler: () => {
+            this.removePartecipante(partecipante_id);
+          }
+        }, {
+          text: 'Annulla',
+          handler: () => { }
+        }
+      ]
+    });
+
+    await alert.present();
+    await alert.onDidDismiss();
+  }
+
+  async removePartecipante(partecipante_id: string) {
+    const loader = await this.loadingCtrl.create({
+      message: "Rimozione partecipante..."
+    });
+    loader.present();
+
+    return new Promise(resolve => {
+      let body = {
+        request: "remove_partecipante",
+        id_partecipante: partecipante_id,
+      }
+
+      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+        if (res.success == true) {
+          loader.dismiss();
+          resolve(true);
+        }
+        else {
+          loader.dismiss();
+          this.presentToast(res.msg);
+        }
+      })
+
+      this.ngOnInit();
+    });
   }
 
   openAddPartecipante() {
@@ -88,6 +142,22 @@ export class ConsultoPage implements OnInit {
       }
     };
     this.router.navigate(['/chat'], navigationExtras);
+  }
+
+  checkRichiedente() {
+    for (var partecipante of this.partecipanti) {
+      if (partecipante.medico_id == this.id_utente && partecipante.richiedente == "true") {
+        this.boolRichiedente = true;
+      }
+    }
+  }
+
+  async presentToast(text) {
+    const toast = await this.toastCtrl.create({
+      message: text,
+      duration: 1500,
+    });
+    toast.present();
   }
 
 

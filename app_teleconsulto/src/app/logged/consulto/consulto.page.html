@@ -54,12 +54,16 @@
           </ion-button>
           <ion-list>
             <ion-item *ngFor="let partecipante of partecipanti">
+              <ion-button *ngIf="boolRichiedente && id_utente != partecipante.medico_id" (click)="removePartecipanteAlert(partecipante.medico_id)"
+              slot="end" expand="block" color="danger" style="margin: 0px; height: 40px;">Rimuovi</ion-button>
               <ion-label>{{ partecipante.medico_cognome }} {{ partecipante.medico_nome }}</ion-label>
             </ion-item>
           </ion-list>
         </ion-card-content>
       </ion-card>
     </div>
+
+    <br>
 
   </div>
 

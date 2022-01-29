@@ -90,7 +90,8 @@ if ($postjson['request'] == "process_register") {
     echo $result;
 } elseif ($postjson['request'] == "load_partecipanti") {
 
-    $query = mysqli_query($mysqli, "SELECT medico.id AS medico_id, medico.cognome AS medico_cognome, medico.nome AS medico_nome 
+    $query = mysqli_query($mysqli, "SELECT medico.id AS medico_id, medico.cognome AS medico_cognome, medico.nome AS medico_nome, 
+    partecipanti.richiedente AS richiedente 
     FROM consulto, medico, partecipanti WHERE consulto.id = '$postjson[id_consulto]' AND consulto.id = partecipanti.id_consulto 
     AND partecipanti.id_medico = medico.id ORDER BY medico_cognome ");
 
@@ -100,6 +101,7 @@ if ($postjson['request'] == "process_register") {
             'medico_id' => $rows['medico_id'],
             'medico_cognome' => $rows['medico_cognome'],
             'medico_nome' => $rows['medico_nome'],
+            'richiedente' => $rows['richiedente'],
         );
     }
 
@@ -259,6 +261,18 @@ elseif ($postjson['request'] == "add_partecipante") {
         $result = json_encode(array('success' => true));
     } else {
         $result = json_encode(array('success' => false, 'msg' => "Errore nell'inserimento di un nuovo partecipante"));
+    }
+
+    echo $result;
+
+} elseif ($postjson['request'] == "remove_partecipante") {
+
+    $query = mysqli_query($mysqli, "DELETE FROM partecipanti WHERE partecipanti.id_medico = '$postjson[id_partecipante]' ");
+
+    if ($query) {
+        $result = json_encode(array('success' => true));
+    } else {
+        $result = json_encode(array('success' => false));
     }
 
     echo $result;
