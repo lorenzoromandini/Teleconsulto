@@ -43,11 +43,13 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="5" style="padding: 0px;">
+          <ion-col style="padding: 0px;">
             <ion-item lines="none">
               <ion-text style="padding-right: 15px;">Codice Fiscale</ion-text>
             </ion-item>
           </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col style="padding: 0px;">
             <ion-label>
               <ion-item>
@@ -118,8 +120,8 @@
           <ion-card-header [ngClass]="modificaPassword_flag ? 'header-aperto' : ''" class="ion-no-padding">
             <ion-item (click)="modificaPassword_flag = !modificaPassword_flag" lines="none">
               <ion-item lines="none" style="padding: 0px;">
-                <ion-icon [name]="!modificaPassword_flag ? 'people-outline' : 'caret-down-outline'" size="large" slot="start"
-                  color="main"></ion-icon>
+                <ion-icon [name]="!modificaPassword_flag ? 'create-outline' : 'caret-down-outline'" size="large"
+                  slot="start" color="main"></ion-icon>
               </ion-item>
               <ion-item lines="none">
                 <ion-text>Modifica Password</ion-text>
@@ -156,7 +158,7 @@
               </ion-col>
             </ion-row>
             <br>
-            <ion-button expand="block" style="margin: 5px 0px 5px 0px; height: 50px;">
+            <ion-button (click)="updatePassword()" expand="block" style="margin: 5px 0px 5px 0px; height: 50px;">
               <ion-icon name="shield-outline" style="padding-right: 5px" size="large"></ion-icon>
               Modifica Password
             </ion-button>

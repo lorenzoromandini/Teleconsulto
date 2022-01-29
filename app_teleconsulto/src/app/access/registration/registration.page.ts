@@ -22,7 +22,7 @@ export class RegistrationPage {
   regexpEmail: any = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   regexpCF: any = new RegExp(/^(?:[A-Z][AEIOU][AEIOUX]|[AEIOU]X{2}|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}(?:[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[15MR][\dLMNP-V]|[26NS][0-8LMNP-U])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM]|[AC-EHLMPR-T][26NS][9V])|(?:[02468LNQSU][048LQU]|[13579MPRTV][26NS])B[26NS][9V])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$/i);
 
-  disabledButton;
+  disabledButton: boolean;
 
   constructor(
     private router: Router,
@@ -52,6 +52,8 @@ export class RegistrationPage {
       this.presentToast("Devi inserire una Email corretta");
     } else if (this.password.length < 6) {
       this.presentToast("Devi inserire una Password di almeno 6 caratteri");
+    } else if (this.conferma_password.length < 6) {
+      this.presentToast("La Conferma Password inserita ha meno di 6 caratteri")
     } else if (this.conferma_password != this.password) {
       this.presentToast("Le password inserite non sono uguali");
     } else {
@@ -64,11 +66,11 @@ export class RegistrationPage {
       return new Promise(resolve => {
         let body = {
           request: "process_register",
-          nome: this.nome,
-          cognome: this.cognome,
-          codice_fiscale: this.codice_fiscale,
+          nome: this.nome.charAt(0).toUpperCase() + this.nome.slice(1),
+          cognome: this.cognome.charAt(0).toUpperCase() + this.cognome.slice(1),
+          codice_fiscale: this.codice_fiscale.toUpperCase(),
           gender: this.gender,
-          professione: this.professione,
+          professione: this.professione.charAt(0).toUpperCase() + this.professione.slice(1),
           data_nascita: this.data_nascita.substr(0, 10),
           email: this.email,
           password: this.password

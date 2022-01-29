@@ -56,7 +56,7 @@ export class ProfilePage implements OnInit {
         {
           text: 'Sì',
           handler: () => {
-            this.updateProfile();
+            this.updatePassword();
           }
         }, {
           text: 'Annulla',
@@ -66,11 +66,16 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  async updateProfile() {
-    if (this.password.length < 5 || !this.email.includes('@')) {
-      this.presentToast("Devi inserire una Email corretta");
-    } else {
-      this.boolModificaPassword = true;
+  async updatePassword() {
+    if (this.password.length < 6) {
+      this.presentToast("Devi inserire una Password di almeno 6 caratteri");
+    } else if (this.conferma_password.length < 6) {
+      this.presentToast("La Conferma Password inserita ha meno di 6 caratteri")
+    } else if (this.conferma_password != this.password) {
+      this.presentToast("Le password inserite non sono uguali")
+    }
+    else {
+      //this.boolModificaPassword = true;
       const loader = await this.loadingCtrl.create({
         message: "Attendi..."
       });
@@ -78,27 +83,20 @@ export class ProfilePage implements OnInit {
 
       return new Promise(resolve => {
         let body = {
-          request: "update_profile",
+          request: "update_password",
           id: this.id,
-          nome: this.nome,
-          cognome: this.cognome,
-          codice_fiscale: this.codice_fiscale,
-          gender: this.gender,
-          professione: this.professione,
-          data_nascita: this.data_nascita,
-          email: this.email,
-          password: this.password
+          nuova_password: this.password
         }
 
         this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
           if (res.success == true) {
             loader.dismiss();
-            this.boolModificaPassword = false;
+           // this.boolModificaPassword = false;
             this.presentToast(res.msg);
             this.router.navigate(['/login']);
           } else {
             loader.dismiss();
-            this.boolModificaPassword = false;
+           // this.boolModificaPassword = false;
             this.presentToast(res.msg);
           }
         })

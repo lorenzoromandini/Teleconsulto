@@ -76,7 +76,7 @@ export class NuovoPage {
       message: "Sei sicuro di voler rimuovere l'assistito ?",
       buttons: [
         {
-          text: 'SÌ',
+          text: 'Sì',
           handler: () => {
             this.rimuoviAssistito();
           }
@@ -99,7 +99,7 @@ export class NuovoPage {
     if (this.checkPaziente() && this.oggetto != "" && this.oggetto != null) {
       this.boolSalva = true;
     } else this.boolSalva = false;
-    
+
     return this.boolSalva;
   }
 
@@ -122,7 +122,7 @@ export class NuovoPage {
       let body = {
         request: "nuovo_consulto",
         id_consulto: this.consultoID,
-        oggetto: this.oggetto,
+        oggetto: this.oggetto.charAt(0).toUpperCase() + this.oggetto.slice(1),
         paziente: this.pazienti[0].id,
       }
 
@@ -181,9 +181,8 @@ export class NuovoPage {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for (var i = 0; i < 11; i++) {
-      result += characters.charAt(Math.floor(Math.random() *
-        charactersLength));
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     this.consultoID = result;
     return this.consultoID;

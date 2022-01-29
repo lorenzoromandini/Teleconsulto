@@ -111,40 +111,20 @@ if ($postjson['request'] == "process_register") {
 
     echo $result;
 
-} elseif ($postjson['request'] == "update_profile") {
+} elseif ($postjson['request'] == "update_password") {
+   
+    $password = md5($postjson['nuova_password']);
 
-    $checkemail = mysqli_fetch_array(mysqli_query($mysqli, "SELECT email FROM medico WHERE id != '$postjson[id]' "));
-
-    if ($checkemail['email'] == $postjson['email']) {
-        $result = json_encode(array('success' => false, 'msg' => "Email già registrata"));
-    } else {
-
-        if ($postjson['passwordInput'] == "") {
-            $password = $postjson['passwordCurrent'];
-        } else {
-            $password = md5($postjson['passwordInput']);
-        }
-
-        $update = mysqli_query($mysqli, "UPDATE medico SET
-    codice_fiscale = '$postjson[codice_fiscale]',
-    nome = '$postjson[nome]',
-    cognome = '$postjson[cognome]',
-    data_nascita = '$postjson[data_nascita]',
-    professione = '$postjson[professione]',
-    email = '$postjson[email]',
-    gender = '$postjson[gender]',
-    password = '$password'
-
-    WHERE id = '$postjson[id]' ");
+    $update = mysqli_query($mysqli, "UPDATE medico SET password = '$password' WHERE id = '$postjson[id]' ");
 
         if ($update) {
-            $result = json_encode(array('success' => true, 'msg' => "Profilo aggiornato"));
+            $result = json_encode(array('success' => true, 'msg' => "Password modificata correttamente"));
         } else {
             $result = json_encode(array('success' => false, 'msg' => "Errore"));
         }
-    }
 
     echo $result;
+    
 } elseif ($postjson['request'] == "search_partecipants") {
 
     $query = mysqli_query($mysqli, "SELECT id, cognome, nome, codice_fiscale, professione FROM medico WHERE cognome LIKE '%$postjson[medico_cognome]%' 
