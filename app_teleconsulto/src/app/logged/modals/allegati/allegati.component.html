@@ -10,7 +10,10 @@
 <ion-content>
   <ion-card style="box-shadow: none; margin-bottom: 20px;">
     <input type="file" id="file" (change)="selectFile()" expand="block" style="margin: 0px 0px 10px 0px; height: 50px;">
-    <ion-button (click)="uploadFileToFirebaseStorage()" expand="block" style="margin: 0px; height: 50px;">
+    <ion-button *ngIf="boolInvia" (click)="uploadFile()" expand="block" style="margin: 0px; height: 50px;">
+      <ion-icon name="send-outline" slot="start" size="large"></ion-icon>INVIA
+    </ion-button>
+    <ion-button *ngIf="!boolInvia" color="medium" expand="block" style="margin: 0px; height: 50px;">
       <ion-icon name="send-outline" slot="start" size="large"></ion-icon>INVIA
     </ion-button>
   </ion-card>

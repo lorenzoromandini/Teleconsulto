@@ -128,7 +128,11 @@ export class ConsultoPage implements OnInit {
 
   async openAllegatiModal() {
     const modal = await this.modalController.create({
-      component: AllegatiComponent
+      component: AllegatiComponent,
+      componentProps: { 
+        id_utente: this.id_utente,
+        id_consulto: this.consulto_id
+      }
     });
 
     await modal.present();

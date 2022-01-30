@@ -51,10 +51,6 @@ const routes: Routes = [
     path: 'chat',
     loadChildren: () => import('./logged/chat/chat.module').then( m => m.ChatPageModule)
   },
-  {
-    path: 'allegati',
-    loadChildren: () => import('./logged/allegati/allegati.module').then( m => m.AllegatiPageModule)
-  },
 ];
 
 @NgModule({

@@ -6,13 +6,11 @@ import { IonicModule } from '@ionic/angular';
 
 import { ConsultoPageRoutingModule } from './consulto-routing.module';
 import { ConsultoPage } from './consulto.page';
-import { AddPartecipantsComponent } from '../modals/add-partecipants/add-partecipants.component';
 import { AllegatiComponent } from '../modals/allegati/allegati.component';
-import { ChatComponent } from '../modals/chat/chat.component';
 import { AutosizeModule } from 'ngx-autosize';
 
 @NgModule({
-  entryComponents: [AddPartecipantsComponent, AllegatiComponent, ChatComponent],
+  entryComponents: [AllegatiComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,6 +18,6 @@ import { AutosizeModule } from 'ngx-autosize';
     ConsultoPageRoutingModule,
     AutosizeModule
   ],
-  declarations: [ConsultoPage, AddPartecipantsComponent, AllegatiComponent, ChatComponent]
+  declarations: [ConsultoPage, AllegatiComponent]
 })
 export class ConsultoPageModule {}

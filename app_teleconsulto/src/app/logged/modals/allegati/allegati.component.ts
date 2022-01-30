@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire//compat/storage';
-import { Storage } from '@ionic/storage';
 import { AccessProviders } from 'src/app/providers/access-providers';
 
 @Component({
@@ -29,33 +28,33 @@ export class AllegatiComponent {
   fileUrl: string = "";
   fileName: string = "";
   messaggioID: string = "";
-  id_utente: string;
+  id_utente;
+  id_consulto;
   allegati: any = [];
+  boolInvia: boolean = false;
 
   constructor(
     private toastCtrl: ToastController,
     private accessProviders: AccessProviders,
-    private storage: Storage,
     private loadingCtrl: LoadingController,
     private modalController: ModalController,
     private firebaseStorage: AngularFireStorage) { }
 
-    ngOnInit() {
-      this.storage.get('storage_xxx').then((res) => {
-        this.datastorage = res;
-        this.id_utente = this.datastorage.id;
-      })
-    }
-
   ionViewWillEnter() {
     this.allegati = [];
+    this.file = null;
+    this.boolInvia = false;
   }
 
-  async loadMessages() {
+  ionViewDidEnter() {
+    // this.loadAllegati();
+  }
+
+  async loadAllegati() {
     return new Promise(resolve => {
       let body = {
         request: "load_allegati",
-        id_consulto: this.consulto_id,
+        id_consulto: this.id_consulto,
       }
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
@@ -69,9 +68,10 @@ export class AllegatiComponent {
 
   selectFile() {
     this.file = (<HTMLInputElement>document.getElementById("file")).files[0];
+    this.boolInvia = true;
   }
 
-  async uploadFileToFirebaseStorage() {
+  async uploadFile() {
     const loader = await this.loadingCtrl.create({
       message: "Caricamento allegato..."
     });
@@ -82,43 +82,40 @@ export class AllegatiComponent {
       ref.getDownloadURL().subscribe(url => {
         this.fileUrl = url;
         this.fileName = this.file.name;
+      }).add(() => {
+        this.uploadAllegatoToDB();
+        loader.dismiss();
+        this.ionViewWillEnter();
+        this.ionViewDidEnter();
       })
-    }).then(() => {
-      loader.dismiss();
-    })
-      .catch(e => {
+    }).catch(e => {
         console.log(e);
       })
   }
 
   async uploadAllegatoToDB() {
     this.generateID();
-    const loader = await this.loadingCtrl.create({
-      message: "Invio..."
-    });
-    loader.present();
 
     return new Promise(resolve => {
       let body = {
-        request: "send_message",
+        request: "send_allegato",
         id_messaggio: this.messaggioID,
-        id_consulto: this.consulto_id,
+        id_consulto: this.id_consulto,
         id_utente: this.id_utente,
         testo: this.fileName,
+        allegato: this.fileUrl
       }
+
+      console.log(body)
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         if (res.success == true) {
-          loader.dismiss();
           resolve(true);
         }
         else {
-          loader.dismiss();
           this.presentToast(res.msg);
         }
       })
-
-      this.ionViewWillEnter();
     });
   }
 

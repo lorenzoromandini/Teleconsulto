@@ -329,4 +329,22 @@ elseif ($postjson['request'] == "add_partecipante") {
     }
 
     echo $result;
+
+} elseif ($postjson['request'] == "send_allegato") {
+
+    $insert = mysqli_query($mysqli, "INSERT INTO messaggi SET
+    id = '$postjson[id_messaggio]',
+    id_medico = '$postjson[id_utente]',
+    id_consulto = '$postjson[id_consulto]',
+    testo = '$postjson[testo]'
+    allegato = '$postjson[allegato]'
+    ");
+
+    if ($insert) {
+        $result = json_encode(array('success' => true));
+    } else {
+        $result = json_encode(array('success' => false, 'msg' => "Errore nel caricamento del file"));
+    }
+
+    echo $result;
 }
