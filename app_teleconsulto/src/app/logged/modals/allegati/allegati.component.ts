@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire//compat/storage';
 import { AccessProviders } from 'src/app/providers/access-providers';
+import { PreviewAnyFile } from '@awesome-cordova-plugins/preview-any-file/ngx';
+import { Downloader, DownloadRequest, NotificationVisibility} from '@ionic-native/downloader/ngx';
 
 @Component({
   selector: 'app-allegati',
@@ -38,6 +40,8 @@ export class AllegatiComponent {
     private accessProviders: AccessProviders,
     private loadingCtrl: LoadingController,
     private modalController: ModalController,
+    private previewFile: PreviewAnyFile,
+    private downloader: Downloader,
     private firebaseStorage: AngularFireStorage) { }
 
   ionViewWillEnter() {
@@ -47,7 +51,7 @@ export class AllegatiComponent {
   }
 
   ionViewDidEnter() {
-    // this.loadAllegati();
+    this.loadAllegati();
   }
 
   async loadAllegati() {
@@ -89,8 +93,8 @@ export class AllegatiComponent {
         this.ionViewDidEnter();
       })
     }).catch(e => {
-        console.log(e);
-      })
+      console.log(e);
+    })
   }
 
   async uploadAllegatoToDB() {
@@ -110,6 +114,7 @@ export class AllegatiComponent {
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         if (res.success == true) {
+          this.presentToast(res.msg);
           resolve(true);
         }
         else {
@@ -117,6 +122,39 @@ export class AllegatiComponent {
         }
       })
     });
+  }
+
+  /*
+  openAllegato(urlAllegato: string) {
+    this.previewFile.preview(urlAllegato).then(() => {
+
+    }, (err) => {
+      alert(JSON.stringify(err));
+    })
+
+  }
+  */
+
+  openFileInBrowser(urlAllegato: string) {
+    window.open(urlAllegato, '_system', 'location-yes');
+  }
+
+  downloadAllegato(urlAllegato: string, titolo: string) {
+    var request: DownloadRequest = {
+      uri: urlAllegato,
+      title: titolo,
+      visibleInDownloadsUi: true,
+      notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
+      destinationInExternalPublicDir: {
+        dirType: "Downloads",
+        subPath: titolo
+      }
+    }
+
+      this.downloader.download(request).then((location: string) => {
+        alert("File salvato in : " + location)
+      })
+    
   }
 
   generateID() {

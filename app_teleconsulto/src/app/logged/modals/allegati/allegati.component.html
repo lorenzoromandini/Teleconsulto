@@ -21,23 +21,25 @@
   <ion-card>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let allegato of allegatiX">
+        <ion-item *ngFor="let allegato of allegati">
           <ion-grid>
             <ion-row>
               <ion-list-header>
-                <ion-col>Pacca</ion-col>
-                <ion-col>Oggi</ion-col>
+                <ion-col>{{ allegato.mittente_cognome }} {{ allegato.mittente_cognome }}</ion-col>
+                <ion-col>{{ allegato.data_ora | date: 'short'}}</ion-col>
               </ion-list-header>
             </ion-row>
             <ion-row>
-              <ion-col>{{ allegato.nome }}</ion-col>
+              <ion-col>{{ allegato.testo }}</ion-col>
+            </ion-row>
+            <ion-row>
               <ion-col>
-                <ion-button fill="clear">
+                <ion-button (click)="openFileInBrowser(allegato.allegato)" fill="clear">
                   <ion-icon name="open-outline"></ion-icon>
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button fill="clear">
+                <ion-button (click)= "downloadAllegato(allegato.allegato, allegato.testo)" fill="clear">
                   <ion-icon name="download-outline"></ion-icon>
                 </ion-button>
               </ion-col>

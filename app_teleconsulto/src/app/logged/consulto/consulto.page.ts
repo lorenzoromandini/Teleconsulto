@@ -61,7 +61,7 @@ export class ConsultoPage implements OnInit {
         for (let datas of res.result) {
           this.partecipanti.push(datas);
         }
-        console.log(this.partecipanti)
+        
         this.checkRichiedente();
         resolve(true);
       })
