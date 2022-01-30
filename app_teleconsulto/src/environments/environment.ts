@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyC_AaiEjnHL1isOQqM3CRDjWNjRHqyZEks",
+    authDomain: "teleconsulto-e1656.firebaseapp.com",
+    projectId: "teleconsulto-e1656",
+    storageBucket: "teleconsulto-e1656.appspot.com",
+    messagingSenderId: "754790250819",
+    appId: "1:754790250819:web:6699592c9950fc1f3317f6",
+    measurementId: "G-M4SBBFSGBV"
+  }
 };
 
 /*

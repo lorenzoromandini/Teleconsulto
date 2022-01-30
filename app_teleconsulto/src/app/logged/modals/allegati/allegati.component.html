@@ -9,9 +9,8 @@
 
 <ion-content>
   <ion-card style="box-shadow: none; margin-bottom: 20px;">
-    <ion-button expand="block" style="margin: 0px 0px 10px 0px; height: 50px;">SELEZIONA ALLEGATO</ion-button>
-    <ion-label></ion-label>
-    <ion-button expand="block" style="margin: 0px; height: 50px;">
+    <input type="file" id="file" (change)="selectFile()" expand="block" style="margin: 0px 0px 10px 0px; height: 50px;">
+    <ion-button (click)="uploadFileToFirebaseStorage()" expand="block" style="margin: 0px; height: 50px;">
       <ion-icon name="send-outline" slot="start" size="large"></ion-icon>INVIA
     </ion-button>
   </ion-card>
@@ -19,7 +18,7 @@
   <ion-card>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let allegato of allegati">
+        <ion-item *ngFor="let allegato of allegatiX">
           <ion-grid>
             <ion-row>
               <ion-list-header>

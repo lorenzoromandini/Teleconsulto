@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "teleconsulto-e1656": {
+      "hosting": {
+        "app": [
+          "teleconsulto-e1656"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "teleconsulto-e1656"
+  }
+}

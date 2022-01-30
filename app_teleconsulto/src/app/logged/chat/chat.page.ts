@@ -20,7 +20,6 @@ export class ChatPage {
   id_utente: string;
   messaggio: string;
   messaggioID: string = "";
-  allegatoID: string = "";
 
   @ViewChild(IonContent) content: IonContent
 

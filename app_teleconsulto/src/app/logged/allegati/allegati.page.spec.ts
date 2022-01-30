@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AddPartecipantsComponent } from './add-partecipants.component';
+import { AllegatiPage } from './allegati.page';
 
-describe('AddPartecipantsComponent', () => {
-  let component: AddPartecipantsComponent;
-  let fixture: ComponentFixture<AddPartecipantsComponent>;
+describe('AllegatiPage', () => {
+  let component: AllegatiPage;
+  let fixture: ComponentFixture<AllegatiPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddPartecipantsComponent ],
+      declarations: [ AllegatiPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddPartecipantsComponent);
+    fixture = TestBed.createComponent(AllegatiPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
