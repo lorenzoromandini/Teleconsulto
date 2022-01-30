@@ -134,6 +134,16 @@ export class ConsultoPage implements OnInit {
     await modal.present();
   }
 
+  async openAllegati() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        id_consulto: JSON.stringify(this.consulto_id),
+        id_utente: JSON.stringify(this.id_utente)
+      }
+    };
+    this.router.navigate(['/allegati'], navigationExtras);
+  }
+
   openChat() {
     let navigationExtras: NavigationExtras = {
       queryParams: {
