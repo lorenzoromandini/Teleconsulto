@@ -1,7 +1,7 @@
 <ion-header style="margin-bottom: 20px;">
   <ion-toolbar>
-    <ion-buttons slot="start" style="padding-left: 10px;">
-      <ion-back-button [routerLink]="['/home']"></ion-back-button>
+    <ion-buttons (click)="goBack()" slot="start" style="padding-left: 10px;">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{ paziente_cognome }} {{ paziente_nome }}</ion-title>
   </ion-toolbar>
