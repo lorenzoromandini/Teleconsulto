@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Utente Loggato
+      Accesso con Autenticazione
     </ion-title>
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/consulto']" routerDirection="forward">Chiudi</ion-button>
@@ -11,11 +11,11 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <ion-card-header color="primary">
+    <ion-card-header color="primary" style="font-size: 20px;">
       Login
     </ion-card-header>
     <ion-card-content padding>
-      <p *ngIf="!loggedIn">Inserisci le tue credenziali di Zoom</p>
+      <p *ngIf="!loggedIn"> <br> Inserisci le tue credenziali di Zoom</p>
       <ion-list *ngIf="!loggedIn">
         <ion-item>
           <ion-label position="stacked">Email</ion-label>
@@ -49,12 +49,12 @@
   <ion-tabs>
     <ion-tab-bar slot>
       <ion-tab-button [routerLink]="['/zoom-non-login']" routerDirection="forward" style="width: 100%;">
-        <ion-icon name="videocam-outline" color="main"></ion-icon>
-        <ion-label>Non-Loggato</ion-label>
+        <ion-icon name="arrow-forward-circle-outline" color="main"></ion-icon>
+        <ion-label>Diretto</ion-label>
       </ion-tab-button>
       <ion-tab-button style="width: 100%;">
-        <ion-icon name="chatbubble-ellipses-outline" color="primary"></ion-icon>
-        <ion-label color="primary">Loggato</ion-label>
+        <ion-icon name="key-outline" color="primary"></ion-icon>
+        <ion-label color="primary">Autenticazione</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
