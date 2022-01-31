@@ -174,9 +174,5 @@ export class ConsultoPage implements OnInit {
     toast.present();
   }
 
-  goBack() {
-    this.router.navigate(['/home']);
-  }
-
 
 }

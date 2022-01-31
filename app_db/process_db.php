@@ -181,7 +181,7 @@ if ($postjson['request'] == "process_register") {
     $insert = mysqli_query($mysqli, "INSERT INTO consulto SET
     id = '$postjson[id_consulto]',
     oggetto = '$postjson[oggetto]',
-    paziente = '$postjson[paziente]',
+    paziente = '$postjson[paziente]'
     ");
 
     if ($insert) {
@@ -192,9 +192,7 @@ if ($postjson['request'] == "process_register") {
 
     echo $result;
 
-}
-
-elseif ($postjson['request'] == "nuovo_consultoPartecipante") {
+} elseif ($postjson['request'] == "nuovo_consultoPartecipante") {
 
     $insert = mysqli_query($mysqli, "INSERT INTO partecipanti SET
     id_medico = '$postjson[id_medico]',
@@ -203,7 +201,7 @@ elseif ($postjson['request'] == "nuovo_consultoPartecipante") {
     ");
 
     if ($insert) {
-        $result = json_encode(array('success' => true));
+        $result = json_encode(array('success' => true, 'msg' => "Nuovo consulto inserito"));
     } else {
         $result = json_encode(array('success' => false, 'msg' => "Errore nell'inserimento del richiedente"));
     }
@@ -221,7 +219,7 @@ elseif ($postjson['request'] == "add_partecipante") {
     ");
 
     if ($insert) {
-        $result = json_encode(array('success' => true));
+        $result = json_encode(array('success' => true, 'msg' => "Medico aggiunto"));
     } else {
         $result = json_encode(array('success' => false, 'msg' => "Errore nell'inserimento di un nuovo partecipante"));
     }

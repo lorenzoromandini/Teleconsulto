@@ -1,4 +1,4 @@
-<ion-header style="margin-bottom: 15px;">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" style="padding-left: 10px;">
       <ion-back-button></ion-back-button>
@@ -9,16 +9,16 @@
 
 <ion-content>
 
-  <div style="margin-left: 10px; margin-right: 10px;">
+  <div style="margin-left: 10px; margin-right: 10px; margin-top: 15px;">
 
     <ion-card style="margin-bottom: 25px;">
       <ion-button *ngIf="!boolPaziente" [routerLink]="['/new-paziente']" routerDirection="forward" expand="block" style="margin: 0px; height: 50px;">
         <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
-        ASSISTITO
+        PAZIENTE
       </ion-button>
       <ion-button *ngIf="boolPaziente" [disabled]="disabledButton" color="medium" expand="block" style="margin: 0px; height: 50px;">
         <ion-icon name="add-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>
-        ASSISTITO
+        PAZIENTE
       </ion-button>
 
       <ion-list style="padding: 0px;">

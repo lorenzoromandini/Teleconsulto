@@ -34,11 +34,11 @@ export class AppComponent {
       this.zoomService.initialize(this.SDK_KEY, this.SDK_SECRET)
         .then((success) => {
           console.log(success);
-         // this.presentToast(success);
+          // this.presentToast(success);
         })
         .catch((error) => {
           console.log(error);
-         // this.presentToast(error);
+          // this.presentToast(error);
         });
     });
 

@@ -28,11 +28,9 @@ export class NewPartecipantPage {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.consulto_id = JSON.parse(params["consulto_id"]);
-      console.log(this.consulto_id);
     })
     this.route.queryParams.subscribe(params => {
       this.partecipanti = JSON.parse(params["partecipanti"]);
-      console.log(this.partecipanti);
     })
   }
 
@@ -82,8 +80,8 @@ export class NewPartecipantPage {
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         if (res.success == true) {
-          console.log(res.success)
           loader.dismiss();
+          this.presentToast(res.msg);
           resolve(true);
         }
         else {

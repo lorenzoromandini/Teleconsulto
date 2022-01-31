@@ -52,25 +52,10 @@ export class NuovoPage {
   ionViewDidEnter() {
     this.route.queryParams.subscribe(params => {
       this.paziente = JSON.parse(params["paziente"]);
-      console.log(this.paziente)
       this.pazienti.push(this.paziente)
-      console.log(this.pazienti)
     })
     this.checkSalva();
   }
-
-  /*
-  async saveNuovoConsultoAlert() {
-    const alert = await this.alertController.create({
-      header: "Salvato !",
-      message: "Nuovo Consulto salvato",
-      buttons: ["Ok"]
-    });
-
-    await alert.present();
-    await alert.onDidDismiss();
-  }
-  */
 
   async rimuoviAssistitoAlert() {
     const alert = await this.alertController.create({
@@ -128,11 +113,8 @@ export class NuovoPage {
         paziente: this.pazienti[0].id,
       }
 
-      console.log(body)
-
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         if (res.success == true) {
-          console.log(res.success)
           this.newConsultoPartecipante()
           loader.dismiss();
           resolve(true);
@@ -142,7 +124,7 @@ export class NuovoPage {
           this.presentToast(res.msg);
         }
       })
-      //this.saveNuovoConsultoAlert();
+    
       this.router.navigate(['/home']);
     });
 
@@ -157,11 +139,9 @@ export class NuovoPage {
         richiedente: 'true',
       }
 
-      console.log(body)
-
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         if (res.success == true) {
-          console.log(res.success)
+          this.presentToast(res.msg);
           resolve(true);
         }
         else {

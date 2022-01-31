@@ -78,7 +78,6 @@ export class ProfilePage implements OnInit {
       this.presentToast("Le password inserite non sono uguali")
     }
     else {
-      //this.boolModificaPassword = true;
       const loader = await this.loadingCtrl.create({
         message: "Attendi..."
       });
@@ -94,12 +93,10 @@ export class ProfilePage implements OnInit {
         this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
           if (res.success == true) {
             loader.dismiss();
-           // this.boolModificaPassword = false;
             this.presentToast(res.msg);
             this.router.navigate(['/login']);
           } else {
             loader.dismiss();
-           // this.boolModificaPassword = false;
             this.presentToast(res.msg);
           }
         })

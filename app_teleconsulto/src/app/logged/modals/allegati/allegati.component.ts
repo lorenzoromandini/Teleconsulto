@@ -3,7 +3,7 @@ import { LoadingController, ModalController, ToastController } from '@ionic/angu
 import { AngularFireStorage } from '@angular/fire//compat/storage';
 import { AccessProviders } from 'src/app/providers/access-providers';
 import { PreviewAnyFile } from '@awesome-cordova-plugins/preview-any-file/ngx';
-import { Downloader, DownloadRequest, NotificationVisibility} from '@ionic-native/downloader/ngx';
+import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 
 @Component({
   selector: 'app-allegati',
@@ -22,6 +22,7 @@ export class AllegatiComponent {
   id_consulto;
   allegati: any = [];
   boolInvia: boolean = false;
+  dateTime;
 
   constructor(
     private toastCtrl: ToastController,
@@ -31,6 +32,12 @@ export class AllegatiComponent {
     private previewFile: PreviewAnyFile,
     private downloader: Downloader,
     private firebaseStorage: AngularFireStorage) { }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.dateTime = new Date().toISOString();
+    });
+  }
 
   ionViewWillEnter() {
     this.allegati = [];
@@ -69,7 +76,7 @@ export class AllegatiComponent {
     });
     loader.present();
 
-    let ref = this.firebaseStorage.ref('file/' + this.file.name);
+    let ref = this.firebaseStorage.ref(this.id_consulto + '/' + this.file.name + '_' + this.dateTime);
     ref.put(this.file).then(() => {
       ref.getDownloadURL().subscribe(url => {
         this.fileUrl = url;
@@ -98,8 +105,6 @@ export class AllegatiComponent {
         allegato: this.fileUrl
       }
 
-      console.log(body)
-
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
         if (res.success == true) {
           this.presentToast(res.msg);
@@ -112,7 +117,7 @@ export class AllegatiComponent {
     });
   }
 
-  
+
   openAllegato(urlAllegato: string) {
     this.previewFile.preview(urlAllegato).then(() => {
 
@@ -121,7 +126,7 @@ export class AllegatiComponent {
     })
 
   }
-  
+
 
   openFileInBrowser(urlAllegato: string) {
     window.open(urlAllegato, '_system', 'location-yes');
@@ -139,10 +144,10 @@ export class AllegatiComponent {
       }
     }
 
-      this.downloader.download(request).then((location: string) => {
-        alert("File salvato in : " + location)
-      })
-    
+    this.downloader.download(request).then((location: string) => {
+      alert("File salvato in : " + location)
+    })
+
   }
 
   generateID() {
