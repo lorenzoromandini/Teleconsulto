@@ -59,6 +59,7 @@ export class NuovoPage {
     this.checkSalva();
   }
 
+  /*
   async saveNuovoConsultoAlert() {
     const alert = await this.alertController.create({
       header: "Salvato !",
@@ -69,6 +70,7 @@ export class NuovoPage {
     await alert.present();
     await alert.onDidDismiss();
   }
+  */
 
   async rimuoviAssistitoAlert() {
     const alert = await this.alertController.create({
@@ -140,7 +142,7 @@ export class NuovoPage {
           this.presentToast(res.msg);
         }
       })
-      this.saveNuovoConsultoAlert();
+      //this.saveNuovoConsultoAlert();
       this.router.navigate(['/home']);
     });
 
