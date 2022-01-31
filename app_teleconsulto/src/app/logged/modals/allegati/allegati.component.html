@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-card style="box-shadow: none; margin-bottom: 20px;">
-    <input type="file" id="file" (change)="selectFile()" expand="block" style="margin: 0px 0px 10px 0px; height: 50px;">
+  <ion-card style="box-shadow: none; margin-bottom: 20px;" class="whitesmoke">
+    <input type="file" id="file" (change)="selectFile()" expand="block" style="margin: 0px 0px 10px 0px; height: 50px;" class="whitesmoke">
     <ion-button *ngIf="boolInvia" (click)="uploadFile()" expand="block" style="margin: 0px; height: 50px;">
       <ion-icon name="send-outline" slot="start" size="large"></ion-icon>INVIA
     </ion-button>
@@ -35,12 +35,12 @@
             <ion-row>
               <ion-col>
                 <ion-button (click)="openAllegato(allegato.allegato)" fill="clear">
-                  <ion-icon name="open-outline"></ion-icon>
+                  <ion-icon name="open-outline" size="large"></ion-icon>
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button (click)= "downloadAllegato(allegato.allegato, allegato.testo)" fill="clear">
-                  <ion-icon name="download-outline"></ion-icon>
+                <ion-button (click)= "downloadAllegato(allegato.allegato, allegato.testo)" fill="clear" style="height: fit-content;">
+                  <ion-icon name="download-outline" size="large"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>

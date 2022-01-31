@@ -34,13 +34,13 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="message-input">
     <ion-row>
       <ion-col size=8>
-        <textarea autosize [(ngModel)]="nuovo_messaggio" style="width: 100%;"></textarea>
+        <textarea autosize maxRows="4" class="message-input" autosize [(ngModel)]="nuovo_messaggio" style="width: 100%;"></textarea>
       </ion-col>
       <ion-col>
-        <ion-button (click)="sendMessage()" [disabled]="nuovo_messaggio == ''">
+        <ion-button  expand='block' fill='clear' color='primary' [disabled]="newMsg === ''" class="msg-btn" (click)="sendMessage()" [disabled]="nuovo_messaggio == ''">
           <ion-icon name="send-outline"></ion-icon>
         </ion-button>
       </ion-col>

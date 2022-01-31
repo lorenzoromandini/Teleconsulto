@@ -1,3 +1,11 @@
+ion-content {
+--background: whitesmoke;
+}
+
+ion-toolbar {
+  --background: whitesmoke;
+  }
+
 #container {
   text-align: center;
 
@@ -27,7 +35,7 @@
 }
 
 .card-header {
-  --background: var(--ion-color-primary-shade);
-  color: var(--ion-color-primary-constrast);
+  --background: var(--ion-color-tertiary);
+  color: white;
   font-size: 16px;
 }

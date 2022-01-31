@@ -7,9 +7,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
-  <ion-content>
+
+  <ion-content id="home">
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -25,7 +25,7 @@
       <ion-card button *ngFor="let consulto of consulti" (click)="openConsulto(consulto)"
         style="margin: 0px 0px 20px 0px">
         <ion-item-divider class="card-header" style="width: 100%; padding: 0px;">
-          <ion-label color="danger" style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+          <ion-label style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
             <h2 class="ion-text-center" style="font-size: 1.3em;">{{ consulto.paziente_cognome }} {{
               consulto.paziente_nome }}</h2>
           </ion-label>
