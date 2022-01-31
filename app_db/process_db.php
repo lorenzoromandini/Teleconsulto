@@ -154,7 +154,8 @@ if ($postjson['request'] == "process_register") {
 } elseif ($postjson['request'] == "search_paziente") {
 
     $query = mysqli_query($mysqli, "SELECT id, cognome, nome, codice_fiscale, data_nascita FROM paziente 
-    WHERE cognome LIKE '%$postjson[paziente_cognome]%' AND nome LIKE '%$postjson[paziente_nome]%' ORDER BY cognome, nome");
+    WHERE cognome LIKE '%$postjson[paziente_cognome]%' AND nome LIKE '%$postjson[paziente_nome]%' 
+    AND codice_fiscale LIKE '%$postjson[paziente_cf]%'  ORDER BY cognome, nome");
 
     while ($rows = mysqli_fetch_array($query)) {
 
@@ -174,46 +175,8 @@ if ($postjson['request'] == "process_register") {
     }
 
     echo $result;
-} elseif ($postjson['request'] == "new_paziente") {
 
-    $paziente = mysqli_fetch_array(mysqli_query($mysqli, "SELECT * FROM paziente WHERE id = '$postjson[id_paziente]' "));
-
-    $data = array(
-        'id' => $paziente['id'],
-        'codice_fiscale' => $paziente['codice_fiscale'],
-        'nome' => $paziente['nome'],
-        'cognome' => $paziente['cognome'],
-        'data_nascita' => $paziente['data_nascita']
-    );
-
-    if ($paziente) {
-        $result = json_encode(array('success' => true, 'result' => $data));
-    } else {
-        $result = json_encode(array('success' => false));
-    }
-
-    echo $result;
-} elseif ($postjson['request'] == "new_partecipante") {
-
-    $partecipante = mysqli_fetch_array(mysqli_query($mysqli, "SELECT * FROM medico WHERE id = '$postjson[id_medico]' "));
-
-    $data = array(
-        'id' => $partecipante['id'],
-        'codice_fiscale' => $partecipante['codice_fiscale'],
-        'nome' => $partecipante['nome'],
-        'cognome' => $partecipante['cognome'],
-        'professione' => $partecipante['professione']
-    );
-
-    if ($partecipante) {
-        $result = json_encode(array('success' => true, 'result' => $data));
-    } else {
-        $result = json_encode(array('success' => false));
-    }
-
-    echo $result;
-
-} elseif ($postjson['request'] == "nuovo_consulto") {
+}  elseif ($postjson['request'] == "nuovo_consulto") {
 
     $insert = mysqli_query($mysqli, "INSERT INTO consulto SET
     id = '$postjson[id_consulto]',

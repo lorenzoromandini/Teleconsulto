@@ -12,18 +12,6 @@ import { Downloader, DownloadRequest, NotificationVisibility} from '@ionic-nativ
 })
 export class AllegatiComponent {
 
-  allegatiX = [
-    {
-      nome: "ahahahhah.png"
-    },
-    {
-      nome: "video.mp4"
-    },
-    {
-      nome: "documento.pdf"
-    },
-  ]
-
   datastorage: any;
   file: any;
   ref: any;
@@ -124,7 +112,7 @@ export class AllegatiComponent {
     });
   }
 
-  /*
+  
   openAllegato(urlAllegato: string) {
     this.previewFile.preview(urlAllegato).then(() => {
 
@@ -133,7 +121,7 @@ export class AllegatiComponent {
     })
 
   }
-  */
+  
 
   openFileInBrowser(urlAllegato: string) {
     window.open(urlAllegato, '_system', 'location-yes');

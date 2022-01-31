@@ -39,6 +39,22 @@
             </ion-label>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col style="padding: 0px">
+            <ion-item lines="none">
+              <ion-text style="padding-right: 15px;">Codice Fiscale</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="padding: 0px">
+            <ion-label>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="paziente_cf"></ion-input>
+              </ion-item>
+            </ion-label>
+          </ion-col>
+        </ion-row>
       </ion-grid>
       <ion-button (click)="searchPaziente()" expand="block" style="margin-top: 15px; height: 50px;">
         <ion-icon name="search-circle-outline" style="padding-right: 5px;" size="large"></ion-icon>

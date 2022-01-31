@@ -13,6 +13,7 @@ export class NewPazientePage {
   pazienti: any = [];
   paziente_cognome: string = "";
   paziente_nome: string = "";
+  paziente_cf: string = "";
 
   constructor(
     private router: Router,
@@ -25,7 +26,8 @@ export class NewPazientePage {
       let body = {
         request: "search_paziente",
         paziente_cognome: this.paziente_cognome,
-        paziente_nome: this.paziente_nome
+        paziente_nome: this.paziente_nome,
+        paziente_cf: this.paziente_cf
       }
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
