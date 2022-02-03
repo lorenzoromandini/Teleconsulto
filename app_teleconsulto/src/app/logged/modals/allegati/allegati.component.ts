@@ -118,6 +118,7 @@ export class AllegatiComponent {
   }
 
 
+  /*
   openAllegato(urlAllegato: string) {
     this.previewFile.preview(urlAllegato).then(() => {
 
@@ -126,6 +127,7 @@ export class AllegatiComponent {
     })
 
   }
+  */
 
 
   openFileInBrowser(urlAllegato: string) {

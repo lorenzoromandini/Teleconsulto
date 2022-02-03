@@ -41,7 +41,7 @@ export class LoginPage {
       });
       loader.present();
 
-      return new Promise(resolve => {
+      return new Promise(() => {
         let body = {
           request: "process_login",
           email: this.email,
@@ -63,7 +63,7 @@ export class LoginPage {
         }, (err) => {
           loader.dismiss();
           this.disabledButton = false;
-          this.presentToast("Timeout");
+          this.presentToast(err.message);
         });
       })
     }
