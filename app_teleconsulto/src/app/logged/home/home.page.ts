@@ -67,26 +67,6 @@ export class HomePage {
     })
   }
 
-  /*
-  async deleteMessage(a) {
-    return new Promise(resolve => {
-      let body = {
-        request: "delete_message",
-        id: a
-      }
-
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
-        if(res.success == true) {
-          this.presentToast("Eliminazione completata");
-          this.ionViewDidEnter();
-        } else {
-          this.presentToast("Errore nell'eliminazione")
-        }
-      })
-    })
-  }
-  */
-
   openConsulto(consulto: any) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
