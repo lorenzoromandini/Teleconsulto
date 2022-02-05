@@ -99,6 +99,7 @@ export class ConsultoPage implements OnInit {
       let body = {
         request: "remove_partecipante",
         id_partecipante: partecipante_id,
+        id_consulto: this.consulto_id
       }
 
       this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
