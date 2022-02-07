@@ -70,42 +70,6 @@ export class ZoomLoginPage {
   }
 
   /**
-   * Join a meeting.
-   */
-  joinMeeting() {
-    console.log('Going to join meeting');
-    console.log(this.meetingNumber);
-    const options = {
-      no_driving_mode: true,
-      no_invite: true,
-      no_meeting_end_message: true,
-      no_titlebar: false,
-      no_bottom_toolbar: false,
-      no_dial_in_via_phone: true,
-      no_dial_out_to_phone: true,
-      no_disconnect_audio: true,
-      no_share: true,
-      no_audio: true,
-      no_video: true,
-      no_meeting_error_message: true,
-      custom_meeting_id: "Customized Title",
-      meeting_views_options: 64,
-      no_unmute_confirm_dialog: true,
-      no_webinar_register_dialog: false
-    };
-    this.zoomService.joinMeeting(this.meetingNumber, this.meetingPassword, this.displayName, options)
-        .then((success) => {
-          console.log(success);
-          this.presentToast(success);
-          this.meetingNumber = null;
-          this.meetingPassword = null;
-        }).catch((error) => {
-          console.log(error);
-          this.presentToast(error);
-    });
-  }
-
-  /**
    * Start an instant meeting.
    */
   startInstantMeeting() {

@@ -29,7 +29,7 @@ export class AllegatiComponent {
     private accessProviders: AccessProviders,
     private loadingCtrl: LoadingController,
     private modalController: ModalController,
-    private previewFile: PreviewAnyFile,
+    // private previewFile: PreviewAnyFile,
     private downloader: Downloader,
     private firebaseStorage: AngularFireStorage) { }
 

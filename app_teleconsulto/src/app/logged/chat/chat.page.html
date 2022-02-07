@@ -12,7 +12,7 @@
   <ion-grid>
     <ion-row *ngFor="let messaggio of messaggi">
       <ion-col size='9' *ngIf="utenteCorrente != messaggio.mittente_id" class="message other-message">
-        <b>{{ messaggio.mittente_cognome }} {{ messaggio.mittente_cognome }}</b>
+        <b>{{ messaggio.mittente_nome }} {{ messaggio.mittente_cognome }}</b>
         <br>
         <span>{{ messaggio.testo }}</span>
         <div class="time" text-right>
