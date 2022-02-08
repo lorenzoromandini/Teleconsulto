@@ -14,6 +14,12 @@
             $sql = $conn->query("SELECT cognome, nome, data_nascita, codice_fiscale FROM paziente WHERE gender='$gender' ORDER BY cognome");
             while ($d = $sql->fetch_assoc())
                 $data[] = $d;
+        } else if (isset($_GET['codice_fiscale'])) {
+            $data = array();
+            $gender = $conn->real_escape_string($_GET['codice_fiscale']);
+            $sql = $conn->query("SELECT cognome, nome, data_nascita, gender FROM paziente WHERE codice_fiscale='$codice_fiscale' ORDER BY cognome");
+            while ($d = $sql->fetch_assoc())
+                $data[] = $d;
         } else {
             $data = array();
             $sql = $conn->query("SELECT cognome, nome, data_nascita, codice_fiscale, gender FROM paziente ORDER BY cognome");
