@@ -1,7 +1,7 @@
 <?php
 define("DB_NAME", "id17412788_teleconsulto_db");
 define("DB_USER", "id17412788_lorenzo_romandini");
-define("DB_PASSWORD", "Lacinatraore1-");
+define("DB_PASSWORD", "");
 define("DB_HOST", "localhost");
 
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME); 
