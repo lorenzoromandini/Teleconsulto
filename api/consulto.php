@@ -101,7 +101,7 @@
 
             $sql1 = $conn->query("SELECT consulto.id AS id_consulto, oggetto, data_inizio, paziente.nome AS paziente_nome, paziente.cognome AS paziente_cognome, 
             paziente.codice_fiscale AS paziente_cf, paziente.gender AS paziente_gender, paziente.data_nascita AS paziente_dataNascita 
-            FROM consulto, partecipanti, paziente, medico WHERE paziente.cf = '$paziente_cf' AND consulto.id = partecipanti.id_consulto 
+            FROM consulto, partecipanti, paziente, medico WHERE paziente_cf = '$paziente_cf' AND consulto.id = partecipanti.id_consulto 
             AND paziente.id = consulto.paziente AND medico.id = partecipanti.id_medico GROUP BY consulto.id ORDER BY paziente.cognome, paziente.nome");
 
             $num_results = mysqli_num_rows($sql1);

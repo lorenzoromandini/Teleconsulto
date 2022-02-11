@@ -11,7 +11,7 @@
         } else if (isset($_GET['professione'])) {
             $data = array();
             $professione = $conn->real_escape_string($_GET['professione']);
-            $sql = $conn->query("SELECT cognome, nome, professione, data_nascita, codice_fiscale, gender, email FROM medico WHERE cognome LIKE '%$professione%' ORDER BY cognome");
+            $sql = $conn->query("SELECT cognome, nome, professione, data_nascita, codice_fiscale, gender, email FROM medico WHERE professione LIKE '%$professione%' ORDER BY cognome");
             while ($d = $sql->fetch_assoc())
                 $data[] = $d;
         } else {
