@@ -38,13 +38,12 @@ export class NewPartecipantPage {
     this.partecipantiSearchList = [];
     return new Promise(resolve => {
       let body = {
-        request: "search_partecipants",
         medico_cognome: this.partecipante_cognome,
         medico_nome: this.partecipante_nome,
         medico_professione: this.partecipante_professione
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'search_partecipants').subscribe((res: any) => {
         for (let datas of res.result) {
           this.partecipantiSearchList.push(datas);
         }
@@ -72,13 +71,12 @@ export class NewPartecipantPage {
 
     return new Promise(resolve => {
       let body = {
-        request: "add_partecipante",
         id_consulto: this.consulto_id,
         id_partecipante: medico_id,
         richiedente: "false",
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'add_partecipante').subscribe((res: any) => {
         if (res.success == true) {
           loader.dismiss();
           this.presentToast(res.msg);

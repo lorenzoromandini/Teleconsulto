@@ -49,11 +49,10 @@ export class ChatPage {
   async loadMessages() {
     return new Promise(resolve => {
       let body = {
-        request: "load_messages",
         id_consulto: this.consulto_id,
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'load_messages').subscribe((res: any) => {
         for (let datas of res.result) {
           this.messaggi.push(datas);
         }
@@ -71,14 +70,13 @@ export class ChatPage {
 
     return new Promise(resolve => {
       let body = {
-        request: "send_message",
         id_messaggio: this.messaggioID,
         id_consulto: this.consulto_id,
         id_utente: this.id_utente,
         testo: this.nuovo_messaggio,
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'send_message').subscribe((res: any) => {
         if (res.success == true) {
           loader.dismiss();
           resolve(true);
@@ -127,11 +125,10 @@ export class ChatPage {
 
     return new Promise(resolve => {
       let body = {
-        request: "delete_message",
         message_id: message_id,
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'delete_message').subscribe((res: any) => {
         if (res.success == true) {
           loader.dismiss();
           resolve(true);

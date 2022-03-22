@@ -54,11 +54,10 @@ export class HomePage {
   async loadConsulti() {
     return new Promise(resolve => {
       let body = {
-        request: "load_consulti_medico",
         id_medico: this.id,
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'load_consulti_medico').subscribe((res: any) => {
         for (let datas of res.result) {
           this.consulti.push(datas);
         }

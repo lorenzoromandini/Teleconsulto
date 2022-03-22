@@ -43,12 +43,11 @@ export class LoginPage {
 
       return new Promise(() => {
         let body = {
-          request: "process_login",
           email: this.email,
           password: this.password
         }
 
-        this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+        this.accessProviders.postData(body, 'process_login').subscribe((res: any) => {
           if (res.success == true) {
             loader.dismiss();
             this.disabledButton = false;

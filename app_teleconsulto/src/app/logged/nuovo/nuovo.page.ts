@@ -107,13 +107,12 @@ export class NuovoPage {
 
     return new Promise(resolve => {
       let body = {
-        request: "nuovo_consulto",
         id_consulto: this.consultoID,
         oggetto: this.oggetto.charAt(0).toUpperCase() + this.oggetto.slice(1),
         paziente: this.pazienti[0].id,
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'nuovo_consulto').subscribe((res: any) => {
         if (res.success == true) {
           this.newConsultoPartecipante()
           loader.dismiss();
@@ -133,13 +132,12 @@ export class NuovoPage {
   async newConsultoPartecipante() {
     return new Promise(resolve => {
       let body = {
-        request: "nuovo_consultoPartecipante",
         id_consulto: this.consultoID,
         id_medico: this.medico_id,
         richiedente: 'true',
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'nuovo_consultoPartecipante').subscribe((res: any) => {
         if (res.success == true) {
           this.presentToast(res.msg);
           resolve(true);

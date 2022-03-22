@@ -53,11 +53,10 @@ export class ConsultoPage implements OnInit {
     this.partecipanti = [];
     return new Promise(resolve => {
       let body = {
-        request: "load_partecipanti",
         id_consulto: this.consulto_id,
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'load_partecipanti').subscribe((res: any) => {
         for (let datas of res.result) {
           this.partecipanti.push(datas);
         }
@@ -97,12 +96,11 @@ export class ConsultoPage implements OnInit {
 
     return new Promise(resolve => {
       let body = {
-        request: "remove_partecipante",
         id_partecipante: partecipante_id,
         id_consulto: this.consulto_id
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'remove_partecipante').subscribe((res: any) => {
         if (res.success == true) {
           loader.dismiss();
           resolve(true);

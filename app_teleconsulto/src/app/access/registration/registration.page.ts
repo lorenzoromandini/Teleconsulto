@@ -65,7 +65,6 @@ export class RegistrationPage {
 
       return new Promise(resolve => {
         let body = {
-          request: "process_register",
           nome: this.nome.charAt(0).toUpperCase() + this.nome.slice(1),
           cognome: this.cognome.charAt(0).toUpperCase() + this.cognome.slice(1),
           codice_fiscale: this.codice_fiscale.toUpperCase(),
@@ -76,7 +75,7 @@ export class RegistrationPage {
           password: this.password
         }
 
-        this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+        this.accessProviders.postData(body, 'process_register').subscribe((res: any) => {
           if (res.success == true) {
             loader.dismiss();
             this.disabledButton = false;

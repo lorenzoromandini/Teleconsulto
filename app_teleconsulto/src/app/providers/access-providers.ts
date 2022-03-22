@@ -22,7 +22,7 @@ export class AccessProviders {
             headers: headers
         }
 
-        return this.http.post(this.server + file, JSON.stringify(body), options)
+        return this.http.post(this.server + file + ".php", JSON.stringify(body), options)
             .timeout(59000) // 59s timeout
             .map(res => res);
     }

@@ -24,13 +24,12 @@ export class NewPazientePage {
     this.pazienti = [];
     return new Promise(resolve => {
       let body = {
-        request: "search_paziente",
         paziente_cognome: this.paziente_cognome,
         paziente_nome: this.paziente_nome,
         paziente_cf: this.paziente_cf
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'search_paziente').subscribe((res: any) => {
         for (let datas of res.result) {
           this.pazienti.push(datas);
         }

@@ -85,12 +85,11 @@ export class ProfilePage implements OnInit {
 
       return new Promise(resolve => {
         let body = {
-          request: "update_password",
           id: this.id,
           nuova_password: this.password
         }
 
-        this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+        this.accessProviders.postData(body, 'update_password').subscribe((res: any) => {
           if (res.success == true) {
             loader.dismiss();
             this.presentToast(res.msg);

@@ -52,11 +52,10 @@ export class AllegatiComponent {
   async loadAllegati() {
     return new Promise(resolve => {
       let body = {
-        request: "load_allegati",
         id_consulto: this.id_consulto,
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'load_allegati').subscribe((res: any) => {
         for (let datas of res.result) {
           this.allegati.push(datas);
         }
@@ -97,7 +96,6 @@ export class AllegatiComponent {
 
     return new Promise(resolve => {
       let body = {
-        request: "send_allegato",
         id_messaggio: this.messaggioID,
         id_consulto: this.id_consulto,
         id_utente: this.id_utente,
@@ -105,7 +103,7 @@ export class AllegatiComponent {
         allegato: this.fileUrl
       }
 
-      this.accessProviders.postData(body, 'process_db.php').subscribe((res: any) => {
+      this.accessProviders.postData(body, 'send_allegato').subscribe((res: any) => {
         if (res.success == true) {
           this.presentToast(res.msg);
           resolve(true);
